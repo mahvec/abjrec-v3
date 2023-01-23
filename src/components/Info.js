@@ -5,15 +5,15 @@ import { Reveal,  } from "react-awesome-reveal";
 
 function Info() {
   return (
-    <div className="max-w-[1440px] mx-auto min-h-[600px] justify items-center pt-20 px-4 bg-gray-200 overflow-hidden">
-      <div className=" mx-auto grid md:grid-cols-2 pt-10">
+    <div className="max-w-[1440px] mx-auto min-h-[600px] justify items-center bg-gray-200 overflow-hidden">
+      <div className=" mx-auto grid md:grid-cols-2 md:h-[600px]  ">
         <>
           <div className="flex flex-col justify-center">
             <Lottie
               loop
               animationData={InfoLottie}
               play
-              className="mx-auto my-4 md:w-500px md:h-auto sm:w-80 sm:h-48"
+              className="mx-auto my-4 md:w-fit  md:h-auto sm:w-80 sm:h-48"
             />
           </div>
         </>

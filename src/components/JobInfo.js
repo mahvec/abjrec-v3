@@ -6,6 +6,7 @@ import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
 import { JOB } from "../components/JobDescription";
 import { CATEGORY as CATEGORIES, LOCATION, WORKTIME } from "./DropdownList";
+// import ColorBg from "../assets/images/job-card.jpg"
 
 function JobInfo() {
   const [search, setSearch] = useState("");
@@ -98,11 +99,11 @@ function JobInfo() {
           <div
             className={
               !drop
-                ? "fixed bg-gray-300 z-50 w-full h-[60%] top-[150px] right-0 left border-gray-600 bg-opacity-90 ease-in-out duration-700 md:hidden"
-                : "fixed top-[-200%] ease-in-out duration-700"
+                ? "fixed bg-gray-300 z-30 w-full h-[75%] bottom-[0px] right-0 left border-gray-600 bg-opacity-90 ease-in-out duration-700 md:hidden"
+                : "fixed bottom-[-200%] ease-in-out duration-700"
             }
           >
-            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-50 border-gray-400 my-5 rounded-lg md:hidden top-[100px]">
+            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-30 border-gray-400 my-5 rounded-lg md:hidden top-[100px]">
               <div className="pt-2 px-2 mb-3">
                 <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
                   Category
@@ -274,7 +275,7 @@ function JobInfo() {
                 onChange={(e) => {
                   setSearch("");
                   setLocation(
-                    LOCATION.find((w) => w.id === e.target.value) ?? LOCATION[0]
+                    LOCATION.find((l) => l.id === e.target.value) ?? LOCATION[0]
                   );
                 }}
                 className="w-full h-14 border-2 rounded-lg px-5 text-base font-bold item-center text-[#023e8a] py-1 outline-none"
@@ -338,7 +339,34 @@ function JobInfo() {
                 </div>
               );
             })}
+
+          <div className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
+                  <div className="grid grid-cols-4 gap-4 h-20">
+                      <div className="">
+                      <div className="rounded-xl border h-16 m-1 bg-gradient-to-r from-cyan-200 to-fuchsia-200">
+                        
+                      </div>
+                      </div>
+                      <div className="col-span-3 ">
+                        <p>JOB TITLE</p>
+                        <span>Posted by: H-R</span>
+                        <span>Category</span>
+                        <div>
+                        <span>full-time</span>
+                        <span>location</span>
+                      </div>
+                      </div>
+                    </div>
+                    <div className="border-t p-4 text-base font-medium">
+                    <p>If you need to use a one-off background-image value that does not make sense to include in your theme, use square brackets to generate a property on the fly using any arbitrary value.</p>
+                  </div>
+                  <div className="border-t ">
+                    <p className="text-end text-xs font-normal px-3">5 days ago</p>
+                  </div>
+                  </div> 
+                       
           </div>
+          
         </div>
 
         {/* SIDE LOTTIE */}

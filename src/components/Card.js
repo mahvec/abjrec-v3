@@ -1,11 +1,10 @@
 import React from "react";
 import '../App.css'
-import { Slide } from "react-awesome-reveal"
+
 
 function Card() {
   return (
     <div className="">
-     <Slide direction="down" >
      <div className="max-w-[1440px] mx-auto bg-gray-100 p-6 py-20">
         {/* HEADIMG FOR CARD */}
         <h1 className="text-[#03256C] font-bold md:text-3xl sm:text-2xl  text-xl text-center py-6">
@@ -99,7 +98,6 @@ function Card() {
           </a>
         </div>
       </div>
-     </Slide>
     </div>
   );
 }
