@@ -1,0 +1,8 @@
+*{
+    overflow-x: hidden;
+}
+.card-css:hover{
+    background-color: #1D70A2;
+    color: beige;
+
+}
