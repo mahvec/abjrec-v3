@@ -1,6 +1,5 @@
 import React from "react";
 import Typed from "react-typed";
-import { Slide } from "react-awesome-reveal";
 import heroPic from "../assets/images/hero1.png"
 
 function Hero() {
