@@ -2,6 +2,7 @@ import React from "react";
 import { Slide } from "react-awesome-reveal";
 import Typed from "react-typed";
 import Worked from "../assets/images/work-image.jpg"
+
 function Itachi() {
   return (
     <>

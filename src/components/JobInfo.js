@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { BsFilterCircle } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
-// import { MdLocationOn } from "react-icons/md";
 import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
 import { JOB } from "../components/JobDescription";
 import { CATEGORY as CATEGORIES, LOCATION, WORKTIME } from "./DropdownList";
-// import ColorBg from "../assets/images/job-card.jpg"
+import { Slide } from "react-awesome-reveal";
+
 
 function JobInfo() {
   const [search, setSearch] = useState("");
@@ -109,8 +109,9 @@ function JobInfo() {
                 : "fixed bottom-[-200%] ease-in-out duration-700"
             }
           >
-            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-30 border-gray-400 my-5 rounded-lg md:hidden top-[70px]">
-              <div className="pt-2 px-2 mb-3">
+            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-30 border-gray-600 my-5 rounded-lg md:hidden top-[70px]">
+             <div className="bg-white">
+             <div className="pt-2 px-2 mb-3">
                 <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
                   Category
                 </p>
@@ -202,6 +203,7 @@ function JobInfo() {
                 </select>
               </div>
             </div>
+             </div>
           </div>
         </div>
 
@@ -310,6 +312,7 @@ function JobInfo() {
           <div className="">
             {jobs().map((job, i) => {
               return (
+                <Slide>
                 <div key={i} className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
                   <div className="grid grid-cols-4 gap-4">
                       <div className=" p-1">
@@ -334,6 +337,7 @@ function JobInfo() {
                         <p className="text-end text-xs px-3 my-1 text-[#023e8a]">5 days ago</p>
                       </div>
           </div> 
+          </Slide>
               );
             })}
 

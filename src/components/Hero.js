@@ -5,8 +5,8 @@ import heroPic from "../assets/images/hero1.png"
 
 function Hero() {
   return (
-    <div className=" grid grid-cols-3 ">
-      <div className="max-w-[1440px] mt-[-96px] w-full h-[800px] mx-auto text-center flex flex-col justify-center col-span-2">
+    <div className=" grid md:grid-cols-3 max-w-[1440px] mx-auto ">
+      <div className=" mt-[-96px] w-full h-[800px] mx-auto text-center flex flex-col justify-center md:col-span-2">
         <p className="text-[#03256C] font-bold p-2">GET YOUR DREAM JOB</p>
         <h1 className="text-[#03256C] md:text-6xl sm:text-5xl text-3xl font-bold md:py-6 sm:py-6 xs:py-6 ">
           Explore all the most exciting jobs roles
@@ -23,8 +23,8 @@ function Hero() {
           />
         </div>
       </div>
-      <div className="col-span-1">
-          <img src={heroPic} alt="hero1" className="" />
+      <div className="md:col-span-1 ">
+          <img src={heroPic} alt="hero1" className="block xs:hidden sm:hidden md:block md:pt-20 lg:pt-10" />
       </div>
     </div>
   );
