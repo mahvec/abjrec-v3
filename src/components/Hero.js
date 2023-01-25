@@ -24,7 +24,7 @@ function Hero() {
         </div>
       </div>
       <div className="col-span-1">
-          <img src={heroPic} alt="hero1" className="my-auto" />
+          <img src={heroPic} alt="hero1" className="" />
       </div>
     </div>
   );
