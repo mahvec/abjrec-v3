@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
-import { RxDropdownMenu } from "react-icons/rx";
+import { BsFilterCircle } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
+// import { MdLocationOn } from "react-icons/md";
 import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
@@ -26,6 +27,7 @@ function JobInfo() {
    * worktime: string;
    * location: string;
    * category: string;
+   * initials: string;
    * description: string;
    * }[]}
    */
@@ -72,25 +74,29 @@ function JobInfo() {
         <div className="flex justify-center xs:justify-start">
           <form
             action=""
-            className="border md:max-w-2xl md:mx-20 xs:ml-5 sm:ml-5 xs:w-[68%] sm:w-[63%] lg:w-[670px] rounded md:p-2 xs:p-2 h-15"
+            className="border md:max-w-2xl md:mx-20 xs:ml-5 sm:ml-5 xs:w-[85%] sm:w-[63%] lg:w-[670px] rounded-lg md:p-2 xs:p-2 h-15 grid grid-cols-9"
           >
+            <span className="col-span-8">
             <input
               onChange={(e) => setSearch(e.target.value)}
               type="search"
               placeholder="Search for vacancy"
-              className="h-[35px] w-full text-sm pl-2 outline-none focus:border"
+              className="h-auto w-full text-sm pl-2 outline-none "
+      
             />
+
+            {/* toggle for filter on mobile view */}
+            </span>
+            <span onClick={handleDrop} className="block md:hidden w-fit col-span-1 m-auto">
+            {!drop ? (
+              <AiOutlineClose size={19} />
+            ) : (
+              <BsFilterCircle size={19} />
+            )}
+          </span>
+            
           </form>
 
-          {/* toggle for filter on mobile view */}
-
-          <div onClick={handleDrop} className="block md:hidden ml-4 mt-2">
-            {!drop ? (
-              <AiOutlineClose size={20} />
-            ) : (
-              <RxDropdownMenu size={25} />
-            )}
-          </div>
         </div>
 
         {/* DROPDOWN ON MOBILE VIEW */}
@@ -103,7 +109,7 @@ function JobInfo() {
                 : "fixed bottom-[-200%] ease-in-out duration-700"
             }
           >
-            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-30 border-gray-400 my-5 rounded-lg md:hidden top-[100px]">
+            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-30 border-gray-400 my-5 rounded-lg md:hidden top-[70px]">
               <div className="pt-2 px-2 mb-3">
                 <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
                   Category
@@ -304,68 +310,35 @@ function JobInfo() {
           <div className="">
             {jobs().map((job, i) => {
               return (
-                <div
-                  key={i}
-                  className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300 "
-                >
-                  <div className="py-2 px-2 border-b border-gray-300 text-[#023e8a] pl:4 md:pl-8">
-                    <h3 className="py-1 font-bold text-md md:text-2xl left uppercase">
-                      {job.title}
-                    </h3>
-                    <p className="xs:text-sm md:text-base font-medium">
-                      <span className="italic">Posted by:</span>
-                      {job.author}
-                    </p>
-
-                    <span className="bg-gray-300 rounded italic text-[0.6rem] px-1 font-medium ">
-                      {job.worktime}
-                    </span>
-                    <span className="bg-gray-300 rounded italic text-[0.6rem] px-1 font-medium mx-2">
-                      {job.location}
-                    </span>
-                    <p className="text-xs">
-                      Job Category:
-                      <span className="italic">{job.category}</span>
-                    </p>
-                  </div>
-                  <p className="text-[0.6rem] block text-end border-b border-gray-300 px-1 text-[#023e8a] ">
-                    2 days ago
-                  </p>
-                  <div>
-                    <p className="xs:text-xs md:pl-8 p-4 text-[#023e8a]">
-                      {job.description}
-                    </p>
-                  </div>
-                </div>
+                <div key={i} className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
+                  <div className="grid grid-cols-4 gap-4">
+                      <div className=" p-1">
+                          <div className=" rounded-xl h-full bg-gradient-to-r flex from-cyan-200 to-fuchsia-200 font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
+                            <p className="m-auto">{job.initials}</p>
+                          </div>
+                      </div>
+                            <div className="col-span-3 mb-1">
+                                <p className="font-bold text-md md:text-lg lg:text-xl left uppercase text-[#023e8a] mr-1 ">{job.title}</p>
+                                <p className="text-sm font-semibold pr-1 text-[#E40066]"> {job.category} </p>
+                                <p className="text-xs italic pr-3">Posted by: {job.author} </p>
+                                  <div className="">
+                                        <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 ">{job.worktime}</span>
+                                        <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 "> <i class="fa fa-solid fa-location-dot"></i> {job.location}</span>
+                                  </div>
+                            </div>
+                    </div>
+                    <div className="border-t p-2 text-sm text-[#023e8a] ">
+                        <p>{job.description}</p>
+                    </div>
+                      <div className="border-t ">
+                        <p className="text-end text-xs px-3 my-1 text-[#023e8a]">5 days ago</p>
+                      </div>
+          </div> 
               );
             })}
 
-          <div className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
-                  <div className="grid grid-cols-4 gap-4 h-20">
-                      <div className="">
-                      <div className="rounded-xl border h-16 m-1 bg-gradient-to-r from-cyan-200 to-fuchsia-200">
-                        
-                      </div>
-                      </div>
-                      <div className="col-span-3 ">
-                        <p>JOB TITLE</p>
-                        <span>Posted by: H-R</span>
-                        <span>Category</span>
-                        <div>
-                        <span>full-time</span>
-                        <span>location</span>
-                      </div>
-                      </div>
-                    </div>
-                    <div className="border-t p-4 text-base font-medium">
-                    <p>If you need to use a one-off background-image value that does not make sense to include in your theme, use square brackets to generate a property on the fly using any arbitrary value.</p>
-                  </div>
-                  <div className="border-t ">
-                    <p className="text-end text-xs font-normal px-3">5 days ago</p>
-                  </div>
-                  </div> 
-                       
-          </div>
+                
+        </div>
           
         </div>
 

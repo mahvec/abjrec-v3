@@ -1,12 +1,12 @@
 import React from "react";
 import Typed from "react-typed";
 import { Slide } from "react-awesome-reveal";
+import heroPic from "../assets/images/hero1.png"
 
 function Hero() {
   return (
-    <div className="">
-      <Slide cascade damping={1}>
-      <div className="max-w-[1440px] mt-[-96px] w-full h-[800px] mx-auto text-center flex flex-col justify-center">
+    <div className=" grid grid-cols-3 ">
+      <div className="max-w-[1440px] mt-[-96px] w-full h-[800px] mx-auto text-center flex flex-col justify-center col-span-2">
         <p className="text-[#03256C] font-bold p-2">GET YOUR DREAM JOB</p>
         <h1 className="text-[#03256C] md:text-6xl sm:text-5xl text-3xl font-bold md:py-6 sm:py-6 xs:py-6 ">
           Explore all the most exciting jobs roles
@@ -21,10 +21,11 @@ function Hero() {
             typeSpeed={100}
             loop
           />
-          
         </div>
       </div>
-      </Slide>
+      <div className="col-span-1">
+          <img src={heroPic} alt="hero1" className="my-auto" />
+      </div>
     </div>
   );
 }
