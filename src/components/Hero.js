@@ -6,7 +6,7 @@ function Hero() {
   return (
     <div className=" grid md:grid-cols-3 max-w-[1440px] mx-auto ">
       <div className=" mt-[-96px] w-full h-[800px] mx-auto text-center flex flex-col justify-center md:col-span-2">
-        <p className="text-[#03256C] font-bold p-2">GET YOUR DREAM JOB</p>
+        <p className="text-[#03256C] font-bold p-2 ">GET YOUR DREAM JOB</p>
         <h1 className="text-[#03256C] md:text-6xl sm:text-5xl text-3xl font-bold md:py-6 sm:py-6 xs:py-6 ">
           Explore all the most exciting jobs roles
         </h1>

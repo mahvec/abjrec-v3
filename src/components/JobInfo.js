@@ -12,8 +12,10 @@ import { Slide } from "react-awesome-reveal";
 function JobInfo() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState(null);
+  // let [category2, setCategory2] = useState("");
   const [worktime, setWorktime] = useState(null);
   const [location, setLocation] = useState(null);
+  // let [filteredJobs, setFilteredJobs] = useState(JOB);
   console.log(search);
 
   const [drop, setDrop] = useState(true);
@@ -38,33 +40,29 @@ function JobInfo() {
       );
     } else {
       const jc = JOB.filter((job) => {
-        console.log(job.category, category?.name);
-        return category === null
-          ? true
-          : job.category
-              .toLowerCase()
-              .includes(category?.name?.toLowerCase() ?? "");
+        return category === null ? true: job.category.toLowerCase().includes(category?.name?.toLowerCase() ?? "");
       });
-      console.log("jc", JOB.length, jc.length);
       const jt = jc.filter((job) => {
-        return worktime === null
-          ? true
-          : job.worktime
-              .toLowerCase()
-              .includes(worktime?.name?.toLowerCase() ?? "");
+        return worktime === null ? true : job.worktime.toLowerCase().includes(worktime?.name?.toLowerCase() ?? "");
       });
-      console.log("jt", jc.length, jt.length);
       const jl = jt.filter((job) => {
-        return location === null
-          ? true
-          : job.location
-              .toLowerCase()
-              .includes(location?.name?.toLowerCase() ?? "");
+        return location === null ? true : job.location.toLowerCase().includes(location?.name?.toLowerCase() ?? "");
       });
-      console.log("jl", jt.length, jl.length);
       return jl;
     }
   }, [search, category, worktime, location]);
+
+  // let myJobs = useCallback(() => {
+  //   if (search !== "") {
+  //     return JOB.filter((job) => job.title.toLowerCase() === search.toLowerCase());
+  //   } else {
+  //     let jobCategory = JOB.filter((eachJob) => category2 !== "" ? eachJob.category.toLowerCase() === category2.toLowerCase() : true);
+  //     let jobTime = jobCategory.filter((eachJob) => worktime !== null ? eachJob.worktime.toLowerCase() === worktime?.name?.toLowerCase() : true);
+  //     let jobLocation = jobTime.filter((eachJob) => location !== null ? eachJob.location.toLowerCase() === location?.name?.toLowerCase() : true);
+  //     console.log("DDDD:::: ", jobLocation);
+  //     return jobLocation;
+  //   }
+  // }, [search, category2, worktime, location]);
 
   return (
     <div>
@@ -78,7 +76,11 @@ function JobInfo() {
           >
             <span className="col-span-8">
             <input
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                // let filteredJobs = JOB.filter((eachJob) => eachJob.category.toLowerCase() === search.toLowerCase());
+                //   setFilteredJobs(filteredJobs);
+              }}
               type="search"
               placeholder="Search for vacancy"
               className="h-auto w-full text-sm pl-2 outline-none "
@@ -195,6 +197,7 @@ function JobInfo() {
                       <option
                         className="rounded font-semibold px-2"
                         key={item.id}
+                        value={item.id}
                       >
                         {item.name}
                       </option>
@@ -222,9 +225,9 @@ function JobInfo() {
                 onChange={(e) => {
                   setSearch("");
                   setCategory(
-                    CATEGORIES.find((c) => c.id === e.target.value) ??
-                      CATEGORIES[0]
+                    CATEGORIES.find((c) => c.id === e.target.value) ?? CATEGORIES[0]
                   );
+                  // console.log("GGGG::: ", category);
                 }}
                 className="w-full h-14 border-2 rounded-lg px-5 text-base font-bold  item-center text-[#023e8a] py-1 outline-none"
               >
@@ -241,6 +244,33 @@ function JobInfo() {
                 })}
               </select>
             </div>
+
+            {/* <div className="pt-2 px-2">
+              <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
+                Category
+              </p>
+              <select
+                value={category2}
+                onChange={(e) => {
+                  setCategory2(category2 = e.target.value);
+                  let filteredJobs = JOB.filter((eachJob) => eachJob.category.toLowerCase() === category2.toLowerCase());
+                  setFilteredJobs(filteredJobs);
+                }}
+                className="w-full h-14 border-2 rounded-lg px-5 text-base font-bold  item-center text-[#023e8a] py-1 outline-none"
+              >
+                {CATEGORIES.map((item) => {
+                  return (
+                    <option
+                      className="rounded font-semibold px-2"
+                      key={item.id}
+                      value={item.name}
+                    >
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div> */}
 
             <div className="pt-1 px-2">
               <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
@@ -293,7 +323,7 @@ function JobInfo() {
                     <option
                       className="rounded font-semibold px-2"
                       key={item.id}
-                      vaule={item.id}
+                      value={item.id}
                     >
                       {item.name}
                     </option>
@@ -310,10 +340,10 @@ function JobInfo() {
       <div className="max-w-[1440px] mx-auto grid md:grid-cols-2 xl:grid-cols-3 mt-10">
         <div className="flex flex-col xl:col-span-2 ml-10 md:w-3/4 xs:mx-5 md:ml-[80px]">
           <div className="">
-            {jobs().map((job, i) => {
+            {jobs().map((job) => {
               return (
-                <Slide>
-                <div key={i} className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
+                <Slide key={job.title}>
+   \             <div className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
                   <div className="grid grid-cols-4 gap-4">
                       <div className=" p-1">
                           <div className=" rounded-xl h-full bg-gradient-to-r flex from-cyan-200 to-fuchsia-200 font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
@@ -326,7 +356,7 @@ function JobInfo() {
                                 <p className="text-xs italic pr-3">Posted by: {job.author} </p>
                                   <div className="">
                                         <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 ">{job.worktime}</span>
-                                        <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 "> <i class="fa fa-solid fa-location-dot"></i> {job.location}</span>
+                                        <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 "> <i className="fa fa-solid fa-location-dot"></i> {job.location}</span>
                                   </div>
                             </div>
                     </div>

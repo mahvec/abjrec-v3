@@ -3,7 +3,7 @@ export const JOB = [
     title: "Full Stack Developer",
     author: "H.R",
     worktime: "Full time",
-    location: "Abuja",
+    location: "Lagos State",
     category: "I.T & Software",
     initials: "I.T",
     description:
@@ -13,7 +13,7 @@ export const JOB = [
     title: "Dev-Ops",
     author: "H.R",
     worktime: "Remote",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "I.T & Software",
     initials: "I.T",
     description:
@@ -23,7 +23,7 @@ export const JOB = [
     title: "Accountant",
     author: "H.R",
     worktime: "Full time",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "Accounting, Audit & Finance",
     initials: "ACC",
     description:
@@ -33,7 +33,7 @@ export const JOB = [
     title: "Data Analyst",
     author: "H.R",
     worktime: "Full time",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "I.T & Software",
     initials: "I.T",
     description: "We are looking for a passionate certified Data Analyst.",
@@ -42,7 +42,7 @@ export const JOB = [
     title: "System and Surveilance Operator",
     author: "H.R",
     worktime: "Part time",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "Admin & Office",
     initials: "A.O",
     description:
@@ -52,7 +52,7 @@ export const JOB = [
     title: "Human Resources and Administrative Officer",
     author: "H.R",
     worktime: "Full time",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "Human Resources",
     initials: "H.R",
     description:
@@ -62,7 +62,7 @@ export const JOB = [
     title: "Business Manager",
     author: "H.R",
     worktime: "Full time",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "Management & Business Development",
     initials: "M.B",
     description:
@@ -72,7 +72,7 @@ export const JOB = [
     title: "Executive Assistant",
     author: "H.R",
     worktime: "Full time",
-    location: "Abuja",
+    location: "Lagos State",
     category: "Admin & Office",
     initials: "A.O",
     description:
@@ -82,7 +82,7 @@ export const JOB = [
     title: "Gender And Safeguarding Officer",
     author: "H.R",
     worktime: "Contract",
-    location: "Abuja",
+    location: "FCT, Abuja",
     category: "Human Resources",
     initials: "H.R",
     description:
