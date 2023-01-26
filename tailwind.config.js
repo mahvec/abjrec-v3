@@ -11,6 +11,9 @@ module.exports = {
       xl: "1280px",
     },
     extend: {
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif']
+      },
       animation: {
         blob: "blob 7s infinite",
       },

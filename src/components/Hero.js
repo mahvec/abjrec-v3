@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Typed from "react-typed";
 import heroPic from "../assets/images/hero1.png"
+
+
 
 function Hero() {
   return (
@@ -20,6 +23,11 @@ function Hero() {
             typeSpeed={100}
             loop
           />
+          
+        </div>
+        <div className="relative mt-5">
+          <button
+          className="text-2xl bg-transparent font-bold font-poppins text-[#03256C] border-2 px-7 py-3 rounded-3xl border-blue-800 hover:border-none hover:bg-[#03256C] hover:text-white "><Link to="/job">Explore Jobs</Link><i className="fa-solid fa-arrow-right-long-to-line"></i> </button>
         </div>
       </div>
       <div className="md:col-span-1 ">
