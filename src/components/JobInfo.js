@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { BsFilterCircle } from "react-icons/bs";
+import { BsFilterCircle, BsBoxArrowInRight } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
@@ -103,16 +103,16 @@ function JobInfo() {
 
         {/* DROPDOWN ON MOBILE VIEW */}
 
-        <div className="relative ">
+        <div className="relative mx-4">
           <div
             className={
               !drop
-                ? "fixed bg-gray-300 z-30 w-full h-[75%] bottom-[0px] right-0 left border-gray-600 bg-opacity-90 ease-in-out duration-700 md:hidden"
-                : "fixed bottom-[-200%] ease-in-out duration-700"
+                ? "fixed mx-auto bg-white z-30 w-[92%] h-[75%] bottom-[0px] flex justify  border-gray-300 rounded-3xl border ease-in-out duration-700 md:hidden "
+                : "fixed z-30 bottom-[-200%] ease-in-out duration-900"
             }
           >
-            <div className="relative flex flex-col w-[75%] mx-auto h-auto border z-30 border-gray-600 my-5 rounded-lg md:hidden top-[70px]">
-             <div className="bg-white">
+            <div className="relative flex flex-col w-[95%] mx-auto mt-14 z-30 border-gray-600  rounded-3xl md:hidden top-[0px]">
+             <div className="bg-white w-fit p-2">
              <div className="pt-2 px-2 mb-3">
                 <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
                   Category
@@ -337,14 +337,14 @@ function JobInfo() {
 
       {/* LIST FOR JOB VACANCY */}
 
-      <div className="max-w-[1440px] mx-auto grid md:grid-cols-2 xl:grid-cols-3 mt-10">
-        <div className="flex flex-col xl:col-span-2 ml-10 md:w-3/4 xs:mx-5 md:ml-[80px]">
+      <div className="max-w-[1440px] mx-auto grid md:grid-cols-3 xl:grid-cols-3 mt-10">
+        <div className="flex flex-col col-span-2 ml-10 md:w-3/4 xs:mx-5 md:ml-[80px]">
           <div className="">
             {jobs().map((job) => {
               return (
                 <Slide key={job.title}>
-   \             <div className="block rounded-xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
-                  <div className="grid grid-cols-4 gap-4">
+   \             <div className="block rounded-3xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
+                  <div className="grid grid-cols-4 gap-4 p-3">
                       <div className=" p-1">
                           <div className=" rounded-xl h-full bg-gradient-to-r flex from-cyan-200 to-fuchsia-200 font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
                             <p className="m-auto">{job.initials}</p>
@@ -355,16 +355,19 @@ function JobInfo() {
                                 <p className="text-sm font-semibold pr-1 text-[#E40066]"> {job.category} </p>
                                 <p className="text-xs italic pr-3">Posted by: {job.author} </p>
                                   <div className="">
-                                        <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 ">{job.worktime}</span>
-                                        <span  className="bg-green-400 rounded italic text-[0.7em] px-1 font-medium mr-3 "> <i className="fa fa-solid fa-location-dot"></i> {job.location}</span>
+                                        <span  className="bg-green-300 rounded italic text-[0.7em] px-1 font-medium mr-3 ">{job.worktime}</span>
+                                        <span  className="bg-green-300 rounded italic text-[0.7em] px-1 font-medium mr-3 "> <i className="fa fa-solid fa-location-dot"></i> {job.location}</span>
                                   </div>
                             </div>
                     </div>
-                    <div className="border-t p-2 text-sm text-[#023e8a] ">
+                    <div className="border-t p-2 text-sm text-[#023e8a] px-4">
                         <p>{job.description}</p>
                     </div>
                       <div className="border-t ">
-                        <p className="text-end text-xs px-3 my-1 text-[#023e8a]">5 days ago</p>
+                        <p className="text-start text-xs p-2 my-1 px-4 text-[#023e8a]">5 days ago</p>
+                      </div>
+                      <div className="border-t  font-semibold p-2 text-end px-4 py-2">
+                        <a href="#" className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"> APPLY NOW </a>
                       </div>
           </div> 
           </Slide>
@@ -378,13 +381,13 @@ function JobInfo() {
 
         {/* SIDE LOTTIE */}
 
-        <div className="flex flex-col xl:mr-20 xs:hidden sm:block xl:max-w-fit">
-          <div className="rounded-lg shadow-lg bg-white md:w-80 lg:min-w-fit lg:mx-10 ml-5 border border-gray-300 mt-3 ">
+        <div className="flex flex-col col-span-1 xs:hidden sm:block lg:w-2/3">
+          <div className="rounded-lg shadow-lg bg-white md:w-40 lg:w-50 lg:min-w-fit lg:mx-auto ml-5 border border-gray-300 mt-3 ">
             <Lottie
               loop
               animationData={Writing}
               play
-              className="mx-auto my-4 md:w-300px md:h-auto sm:w-80 sm:h-48"
+              className="mx-auto my-4 md:w-fit md:h-auto"
             />
             <div className="p-6 xs:pr-3">
               <h5 className="text-sm font-bold text-[#023e8a] ">
@@ -396,12 +399,12 @@ function JobInfo() {
               </p>
             </div>
           </div>
-          <div className="rounded-lg shadow-lg bg-white md:w-[316px] lg:min-w-fit lg:mx-10 ml-5 border border-gray-300 mt-3 ">
+          <div className="rounded-lg shadow-lg bg-white md:w-40 lg:min-w-fit lg:mx-auto ml-5 border border-gray-300 mt-3 ">
             <Lottie
               loop
               animationData={Recruit}
               play
-              className="mx-auto my-4 md:scale-50 md:h-auto sm:w-80 sm:h-48"
+              className="mx-auto my-4 md:h-auto sm:w-fit"
             />
             <div className="p-6 xs:pr-3">
               <h5 className="text-sm font-bold text-[#023e8a] ">
