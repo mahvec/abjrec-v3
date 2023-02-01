@@ -1,7 +1,7 @@
 import React from "react";
 import Lottie from "react-lottie-player";
 import InfoLottie from "../assets/Info.json";
-import { Reveal,  } from "react-awesome-reveal";
+import { Reveal  } from "react-awesome-reveal";
 
 function Info() {
   return (
