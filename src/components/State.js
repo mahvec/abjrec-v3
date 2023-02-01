@@ -1,5 +1,5 @@
 export const STATES = [
-  { name: "", id: "0"},
+  { name: "", id: "0" },
   { name: "Abia", id: "1" },
   { name: "Adamawa", id: "2" },
   { name: "Akwa Ibom", id: "3" },

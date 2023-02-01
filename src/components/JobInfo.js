@@ -352,7 +352,7 @@ function JobInfo() {
                     </div>
                     <div className="border-t  font-semibold p-2 text-end px-4 py-2">
                       <a
-                        href="/form"
+                        href="#"
                         className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
                       >
                         {" "}
