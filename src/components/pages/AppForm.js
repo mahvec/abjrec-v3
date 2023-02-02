@@ -35,7 +35,7 @@ const AppForm = () => {
       position: "",
       category: "",
       linkedIn: "",
-      cv: null,
+      cv: "",
     },
     validationSchema: basicSchema,
     onSubmit,
@@ -81,8 +81,8 @@ const AppForm = () => {
                   placeholder="Enter full name"
                   className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600 shadow-sm"
                 />
-                {errors.firstName && touched.firstName && (
-                  <p className="text-xs text-[#a62d2d] top-0">
+                {errors.fullName && touched.fullName && (
+                  <p className="p-0 text-xs text-[#a62d2d] top-0">
                     {errors.fullName}
                   </p>
                 )}
@@ -187,7 +187,7 @@ const AppForm = () => {
                   onBlur={handleBlur}
                   id="city"
                   type="text"
-                  placeholder=""
+                  placeholder="City/Town you live in"
                   className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
                 />
                 {errors.city && touched.city && (
@@ -234,12 +234,11 @@ const AppForm = () => {
                     );
                   })}
                 </select>
-                {errors.category &&
-                  touched.category(
-                    <p className="text-xs text-[#a62d2d] top-0">
-                      {errors.category}
-                    </p>
-                  )}
+                {errors.category && touched.category && (
+                  <p className="text-xs text-[#a62d2d] top-0">
+                    {errors.category}
+                  </p>
+                )}
 
                 <label
                   htmlFor="linkedIn"
@@ -279,9 +278,6 @@ const AppForm = () => {
                   className="h-8 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
                   required
                 />
-                {errors.cv && touched.cv && (
-                  <p className="text-xs text-[#a62d2d] top-0">{errors.cv}</p>
-                )}
               </div>
 
               <Link to="/success">

@@ -22,7 +22,8 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex justify-between items-center h-24 max-w-[1440px] mx-auto px-4 text-[#03256C]">
+      <div className="flex justify-between items-center h-16 max-w-[1440px] mx-auto px-4 text-[#03256C]">
+        {/* MAIN NAV BAR */}
         <h1 className="md:text-2xl xs:sm:md:text-2xl text-xl w-full text-[#03256C]  font-bold">
           <Link to="/">Abuja Recruiter</Link>
         </h1>
@@ -34,13 +35,17 @@ function Navbar() {
             <Link to="/job">Find A Job</Link>
           </li>
         </ul>
-        <div onClick={handleNav} className="block md:hidden">
+
+        {/* SIDE BAR */}
+
+        <div onClick={handleNav} className="block md:hidden z-[60]">
           {!nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
         </div>
+
         <div
           className={
             !nav
-              ? " fixed left-0 top-0 w-[70%] h-screen border-r border-r-gray-300 bg-white ease-in-out duration-500 z-50 "
+              ? " fixed left-0 top-0 w-[800%] h-screen border-r border-r-gray-300 bg-white ease-in-out duration-500 z-50 "
               : "fixed left-[-200%] z-50 ease-in-out duration-200"
           }
         >
@@ -50,16 +55,17 @@ function Navbar() {
             </Link>
           </h1>
           <ul className="pt-10 uppercase p-4">
-            <li className="p-4 border-b border-b-gray-600 text-sm">
+            <li className="p-4 border-b border-b-gray-600 text-sm font-medium">
               <Link to="/about">About</Link>
             </li>
-            <li className="p-4 border-b border-b-gray-600 text-sm ">
+            <li className="p-4 border-b border-b-gray-600 text-sm font-medium">
               <Link to="/job">Find A Job</Link>
             </li>
           </ul>
         </div>
       </div>
 
+      {/* BOTTOM NAV */}
       <div className=" rounded-tl-xl rounded-tr-xl md:hidden flex fixed inset-x-0 bottom-0 z-40 bg-slate-400 shadow items-center justify-evenly h-10 text-xs font-medium">
         <NavLink
           style={({ isActive }) => (isActive ? activeStyle : undefined)}

@@ -1,11 +1,10 @@
 import React from "react";
-import '../App.css'
-
+import "../App.css";
 
 function Card() {
   return (
     <div className="">
-     <div className="max-w-[1440px] mx-auto bg-gray-100 p-6 py-20">
+      <div className="max-w-[1440px] mx-auto bg-gray-100 p-6 py-20">
         {/* HEADIMG FOR CARD */}
         <h1 className="text-[#03256C] font-bold md:text-3xl sm:text-2xl  text-xl text-center py-6">
           Most Demanded Job Catergories
@@ -76,7 +75,7 @@ function Card() {
               Finance
             </h2>
           </a>
-          <a
+          {/* <a
             href="/job"
             className="flex flex-col bg-white rounded-lg shadow-lg w-full m-6 h-32 justify-center overflow-hidden card-css transition duration-500 text-[#03256C] sm:w-52 xs:scale-110 lg:scale-110"
           >
@@ -85,8 +84,8 @@ function Card() {
             <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
               Finance
             </h2>
-          </a>
-          <a
+          </a> */}
+          {/* <a
             href="/job"
             className="flex flex-col bg-white rounded-lg shadow-lg w-full m-6 h-32 justify-center overflow-hidden card-css transition duration-500 text-[#03256C] sm:w-52 xs:scale-110 lg:scale-110"
           >
@@ -95,7 +94,7 @@ function Card() {
             <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
               Finance
             </h2>
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

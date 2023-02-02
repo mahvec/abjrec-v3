@@ -102,7 +102,7 @@ function JobInfo() {
           <div
             className={
               !drop
-                ? "fixed mx-auto bg-white z-30 w-[92%] h-[75%] bottom-[0px] flex justify  border-gray-300 rounded-3xl border ease-in-out duration-700 md:hidden "
+                ? "fixed mx-auto bg-white z-30 w-[92%] h-[75%] bottom-[0px] flex justify  border-gray-300 rounded-2xl border ease-in-out duration-700 md:hidden "
                 : "fixed z-30 bottom-[-200%] ease-in-out duration-900"
             }
           >
@@ -123,7 +123,7 @@ function JobInfo() {
                           CATEGORIES[0]
                       );
                     }}
-                    className="w-full h-10 border-2 rounded-lg px-5 text-base font-bold  item-center text-[#023e8a] py-1 outline-none"
+                    className="w-full h-auto border-2 rounded-lg px-5 text-base font-bold  item-center text-[#023e8a] py-1 outline-none"
                   >
                     {CATEGORIES.map((item) => {
                       return (
@@ -154,7 +154,7 @@ function JobInfo() {
                           WORKTIME[0]
                       );
                     }}
-                    className="w-full h-10 border-2 rounded-lg px-5 text-base font-bold item-center text-[#023e8a] py-1 outline-none"
+                    className="w-full h-auto border-2 rounded-lg px-5 text-base font-bold item-center text-[#023e8a] py-1 outline-none"
                   >
                     {WORKTIME.map((item) => {
                       return (
@@ -185,7 +185,7 @@ function JobInfo() {
                           LOCATION[0]
                       );
                     }}
-                    className="w-full h-10 border-2 rounded-lg px-5 text-base font-bold item-center text-[#023e8a] py-1 outline-none"
+                    className="w-full h-auto border-2 rounded-lg px-5 text-base font-bold item-center text-[#023e8a] py-1 outline-none"
                   >
                     {LOCATION.map((item) => {
                       return (
@@ -311,9 +311,8 @@ function JobInfo() {
             {jobs().map((job) => {
               return (
                 <Slide key={job.title}>
-                  \{" "}
                   <div className="block rounded-3xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
-                    <div className="grid grid-cols-4 gap-4 p-3">
+                    <div className="grid grid-cols-4 gap-4 p-2">
                       <div className=" p-1">
                         <div className=" rounded-xl h-full bg-gradient-to-r flex from-cyan-200 to-fuchsia-200 font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
                           <p className="m-auto">{job.initials}</p>
@@ -342,21 +341,23 @@ function JobInfo() {
                         </div>
                       </div>
                     </div>
-                    <div className="border-t p-2 text-sm text-[#023e8a] px-4">
+                    <div className="border-t p-2 text-xs text-[#023e8a] ">
                       <p>{job.description}</p>
                     </div>
-                    <div className="border-t ">
-                      <p className="text-start text-xs p-2 my-1 px-4 text-[#023e8a]">
-                        5 days ago
-                      </p>
+                    <div className="border-t gap-5">
+                      <span className="text-start text-xs p-2 my-1 px-4 text-[#023e8a]">
+                        Published:
+                      </span>
+                      <span className="text-start text-xs p-2 my-1 px-4 text-[#023e8a]">
+                        Application end:
+                      </span>
                     </div>
                     <div className="border-t  font-semibold p-2 text-end px-4 py-2">
                       <a
-                        href="#"
+                        href="/form"
                         className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
                       >
-                        {" "}
-                        APPLY NOW{" "}
+                        APPLY NOW
                       </a>
                     </div>
                   </div>

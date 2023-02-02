@@ -1,19 +1,19 @@
 import React from "react";
 import Lottie from "react-lottie-player";
 import InfoLottie from "../assets/Info.json";
-import { Reveal  } from "react-awesome-reveal";
+import { Reveal } from "react-awesome-reveal";
 
 function Info() {
   return (
-    <div className="max-w-[1440px] mx-auto min-h-[600px] justify items-center bg-gray-200 overflow-hidden">
-      <div className=" mx-auto grid md:grid-cols-2 md:h-[600px]  ">
+    <div className="max-w-[1440px] mx-auto min-h-[400px] justify items-center bg-slate-100 overflow-hidden rounded-xl">
+      <div className=" mx-auto grid md:grid-cols-2 md:h-[500px]  ">
         <>
           <div className="flex flex-col justify-center">
             <Lottie
               loop
               animationData={InfoLottie}
               play
-              className="mx-auto my-4 md:w-fit  md:h-auto sm:w-80 sm:h-48"
+              className="mx-auto my-4 md:w-fit  md:h-auto sm:w-70 sm:h-48"
             />
           </div>
         </>

@@ -7,6 +7,7 @@ import Info2 from "./components/Info2";
 import Itachi from "./components/Itachi";
 import Navbar from "./components/Navbar";
 import NewsLetter from "./components/NewsLetter";
+import TeamVision from "./components/TeamVision";
 
 function Home() {
   return (
@@ -14,9 +15,10 @@ function Home() {
       <Navbar />
       <Hero />
       <Info />
-      <Info2 />
       <Itachi />
+      <Info2 />
       <Card />
+      <TeamVision />
       <NewsLetter />
       <Footer />
     </div>

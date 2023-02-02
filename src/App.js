@@ -4,7 +4,6 @@ import Home from "./Home";
 import About from "./components/pages/About";
 import Job from "./components/pages/Job";
 import "./App.css";
-import Apply from "./components/pages/Apply";
 import AppForm from "./components/pages/AppForm";
 import AppSuccess from "./components/AppSuccess";
 
@@ -16,7 +15,6 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/job" element={<Job />} />
-          <Route path="/apply" element={<Apply />} />
           <Route path="/form" element={<AppForm />} />
           <Route path="/success" element={<AppSuccess />} />
         </Routes>
