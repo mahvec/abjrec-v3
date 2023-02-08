@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../../schemas/schemaIndex";
 import "./App1.css";
-import { STATES } from "../State";
-import { CATEGORY } from "../DropdownList";
+import { states } from "../State";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { number, string } from "yup";
 
 const onSubmit = async (values, actions) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -26,25 +26,40 @@ const AppForm = () => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      fullName: "",
-      email: "",
-      phoneNumber: "",
-      address: "",
-      stateCap: "",
-      city: "",
-      position: "",
-      category: "",
-      linkedIn: "",
-      cv: "",
+      fullName: string,
+      email: string,
+      phoneNumber: number,
+      address: string,
+      stateCap: string,
+      city: string,
+      position: string,
+      category: string,
+      linkedIn: string,
+      cv: string,
     },
     validationSchema: basicSchema,
     onSubmit,
   });
 
+  const [state, setState] = useState();
+  const [lga, setLga] = useState([]);
+
+  function handleState(event) {
+    setState(event.target.value);
+    setLga(
+      states.find(({ state }) => state.name === event.target.value).state.locals
+    );
+  }
+
+  function stateHandleOnChange(event) {
+    handleChange(event);
+    handleState(event);
+  }
+
   return (
     <div>
       <Navbar />
-      <div className="p-3 md:grid md:grid-cols-2 ">
+      <div className="p-3 md:grid md:grid-cols-2 max-w-[1440px] mx-auto">
         <div className="md:col-span-1 flex flex-col justify-center items-center h-fit md:h-screen">
           <div>
             <h2 className="text-3xl overflow-hidden font-bold m-10 uppercase text-[#03256C]">
@@ -60,212 +75,243 @@ const AppForm = () => {
 
         {/* APPLICATION FORM */}
         <div className="flex flex-col justify-center  items-center mb-4">
-          <div className="block p-6 rounded-xl  bg-gradient-to-r from-pink-50 to-cyan-50 shadow-lg shadow-slate-300 mb-4 border">
-            <form app onSubmit={handleSubmit} autoComplete="off">
-              <h2 className=" font-semibold text-lg font-poppins ml-2 text-[#03256C]">
-                APPLICATION FORM
-              </h2>
-              <div className=" border p-3 rounded-xl m-1 bg-white">
-                <label
-                  htmlFor="fullName"
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  Full Name
-                </label>
+          <p className="text-[#03256C] ">Fill In Your Details</p>
+          <div className="w-5/6 p-4">
+            <form
+              app
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              className=" w-full"
+            >
+              <div className="relative z-0 w-full mb-6 group">
                 <input
                   value={values.fullName}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="fullName"
                   type="text"
-                  placeholder="Enter full name"
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600 shadow-sm"
+                  name="fullName"
+                  className="block py-2.5  px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="floating_fullName"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  Enter Your Full Name
+                </label>
                 {errors.fullName && touched.fullName && (
                   <p className="p-0 text-xs text-[#a62d2d] top-0">
                     {errors.fullName}
                   </p>
                 )}
+              </div>
 
-                <label
-                  htmlFor="email"
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  Email
-                </label>
+              <div className="relative z-0 w-full mb-6 group ">
                 <input
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2 bg-transparent outline-blue-600 shadow-sm"
+                  name="email"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="email"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  Email address
+                </label>
                 {errors.email && touched.email && (
                   <p className="text-xs text-[#a62d2d] top-0">{errors.email}</p>
                 )}
+              </div>
 
-                <label
-                  htmlFor="phoneNumber"
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  Phone Number
-                </label>
+              <div className="relative z-0 w-full mb-6 group ">
                 <input
                   value={values.phoneNumber}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="phoneNumber"
                   type="number"
-                  placeholder=""
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600 shadow-sm"
+                  name="phoneNumber"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="phoneNumber"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  Phone number (080-****-****)
+                </label>
                 {errors.phoneNumber && touched.phoneNumber && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.phoneNumber}
                   </p>
                 )}
+              </div>
 
-                <label
-                  htmlFor="address "
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  Address
-                </label>
+              <div className="relative z-0 w-full mb-6 group ">
                 <input
                   value={values.address}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="address"
                   type="text"
-                  placeholder="Address"
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
+                  name="address"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="address"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  Residential Address
+                </label>
                 {errors.address && touched.address && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.address}
                   </p>
                 )}
+              </div>
 
-                <label
-                  htmlFor="address "
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  State
-                </label>
-                <select
-                  value={values.stateCap}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  id="stateCap"
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
-                >
-                  {STATES.map((item) => {
-                    return (
-                      <option value={item.name} key={item.id}>
-                        {item.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                {errors.stateCap && touched.stateCap && (
-                  <p className="text-xs text-[#a62d2d] top-0">
-                    {errors.stateCap}
-                  </p>
-                )}
+              <div className="grid md:grid-cols-2 md:gap-4">
+                <div className="relative z-0 w-full mb-6 group">
+                  <label
+                    htmlFor="stateCap"
+                    className="text-xs font-semibold text-[#03256C]"
+                  >
+                    STATE
+                  </label>
+                  <select
+                    value={values.stateCap}
+                    onChange={stateHandleOnChange}
+                    onBlur={handleBlur}
+                    id="stateCap"
+                    name="stateCap"
+                    className=" w-full text-xs mb-2 pl-2 bg-transparent  border-0 border-b-2 shadow-sm border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  >
+                    {states.map(({ state }) => {
+                      return (
+                        <option value={state.name} key={state.id}>
+                          {state.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {errors.stateCap && touched.stateCap && (
+                    <p className="text-xs text-[#a62d2d] top-0">
+                      {errors.stateCap}
+                    </p>
+                  )}
+                </div>
 
-                <label
-                  htmlFor="city"
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  City/Town
-                </label>
-                <input
-                  value={values.city}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  id="city"
-                  type="text"
-                  placeholder="City/Town you live in"
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
-                />
-                {errors.city && touched.city && (
-                  <p className="text-xs text-[#a62d2d] top-0">{errors.city}</p>
-                )}
+                <div className="relative z-0 w-full mb-6 group ">
+                  <label
+                    htmlFor="city"
+                    className="text-xs font-semibold text-[#03256C]"
+                  >
+                    LGA
+                  </label>
+                  <select
+                    value={values.city}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    id="city"
+                    className="w-full text-xs mb-2 pl-2 bg-transparent  border-0 border-b-2 shadow-sm border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  >
+                    {lga.map((lg) => {
+                      return (
+                        <option value={lg.name} key={lg.id}>
+                          {lg.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {errors.city && touched.city && (
+                    <p className="text-xs text-[#a62d2d] top-0">
+                      {errors.city}
+                    </p>
+                  )}
+                </div>
+              </div>
 
-                <label
-                  htmlFor="position"
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  Postion You're Applying For
-                </label>
+              <div className="relative z-0 w-full mb-6 group ">
                 <input
                   value={values.position}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  id="position"
+                  id="postion"
                   type="text"
-                  placeholder=""
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
+                  name="position"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
-                {errors.city && touched.city && (
-                  <p className="text-xs text-[#a62d2d] top-0">{errors.city}</p>
-                )}
-
                 <label
-                  htmlFor="address "
-                  className="text-xs font-semibold text-[#03256C]"
+                  htmlFor="position"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
                 >
-                  Category
+                  Role
                 </label>
-                <select
-                  value={values.category}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  id="category"
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
-                >
-                  {CATEGORY.map((item) => {
-                    return (
-                      <option value={item.name} key={item.id}>
-                        {item.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                {errors.category && touched.category && (
+                {errors.position && touched.position && (
                   <p className="text-xs text-[#a62d2d] top-0">
-                    {errors.category}
+                    {errors.position}
                   </p>
                 )}
+              </div>
 
-                <label
-                  htmlFor="linkedIn"
-                  className="text-xs font-semibold text-[#03256C]"
-                >
-                  Link to LinkedIn Profile
-                </label>
+              <div className="relative z-0 w-full mb-6 group">
                 <input
                   value={values.linkedIn}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="linkedIn"
                   type="text"
-                  placeholder=""
-                  className="h-7 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
+                  name="linkedIn"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="linkedIn"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  Link to LinkedIn profile
+                </label>
                 {errors.linkedIn && touched.linkedIn && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.linkedIn}
                   </p>
                 )}
+              </div>
 
+              {/* <div>
+                  <label
+                    htmlFor="C.V"
+                    className="text-xs font-semibold text-[#03256C]"
+                  >
+                    Upload C.V
+                  </label>
+                  <input
+                    value={values.cv}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    id="cv"
+                    type="file"
+                    placeholder=""
+                    accept=".pdf, .doc, .docx, .txt, .jpg, .psd, .html"
+                    className="h-8 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
+                    required
+                  />
+                </div> */}
+
+              <div>
                 <label
-                  htmlFor="C.V"
-                  className="text-xs font-semibold text-[#03256C]"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  for="small_size"
                 >
-                  Upload C.V
+                  Small file input
                 </label>
                 <input
                   value={values.cv}
@@ -275,8 +321,8 @@ const AppForm = () => {
                   type="file"
                   placeholder=""
                   accept=".pdf, .doc, .docx, .txt, .jpg, .psd, .html"
-                  className="h-8 p-1 w-full rounded-md border border-slate-300 text-xs mb-2 pl-2bg-transparent outline-blue-600  shadow-sm"
                   required
+                  class="block w-full mb-5 text-xs text-gray-400 border  p-1 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
                 />
               </div>
 

@@ -1,12 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { BsFilterCircle } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
-import { JOB } from "../components/JobDescription";
+// import { JOB } from "../components/JobDescription";
 import { CATEGORY as CATEGORIES, LOCATION, WORKTIME } from "./DropdownList";
 import { Slide } from "react-awesome-reveal";
+// import axios from "axios";
+import { fetchJobApi } from "../components/JobApi";
 
 function JobInfo() {
   const [search, setSearch] = useState("");
@@ -19,6 +21,12 @@ function JobInfo() {
 
   const handleDrop = () => setDrop(!drop);
 
+  const [jobData, setJobData] = useState([]);
+
+  useEffect(() => {
+    fetchJobApi().then(({ jobs }) => setJobData(jobs));
+  }, []);
+
   /**
    * @type {()=> {
    * title: string;
@@ -30,13 +38,13 @@ function JobInfo() {
    * description: string;
    * }[]}
    */
-  const jobs = useCallback(() => {
+  const filterJobs = useCallback(() => {
     if (search !== "") {
-      return JOB.filter((job) =>
+      return jobData.filter((job) =>
         job.title.toLowerCase().includes(search.toLowerCase())
       );
     } else {
-      const jc = JOB.filter((job) => {
+      const jc = jobData.filter((job) => {
         return category === null
           ? true
           : job.category
@@ -59,7 +67,7 @@ function JobInfo() {
       });
       return jl;
     }
-  }, [search, category, worktime, location]);
+  }, [search, category, worktime, location, jobData]);
 
   return (
     <div>
@@ -308,14 +316,14 @@ function JobInfo() {
       <div className="max-w-[1440px] mx-auto grid md:grid-cols-3 xl:grid-cols-3 mt-10">
         <div className="flex flex-col col-span-2 ml-10 md:w-3/4 xs:mx-5 md:ml-[80px]">
           <div className="">
-            {jobs().map((job) => {
+            {filterJobs().map((job) => {
               return (
                 <Slide key={job.title}>
                   <div className="block rounded-3xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
                     <div className="grid grid-cols-4 gap-4 p-2">
                       <div className=" p-1">
                         <div className=" rounded-xl h-full bg-gradient-to-r flex from-cyan-200 to-fuchsia-200 font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
-                          <p className="m-auto">{job.initials}</p>
+                          <p className="m-auto">INI</p>
                         </div>
                       </div>
                       <div className="col-span-3 mb-1">
@@ -323,20 +331,16 @@ function JobInfo() {
                           {job.title}
                         </p>
                         <p className="text-sm font-semibold pr-1 text-[#E40066]">
-                          {" "}
-                          {job.category}{" "}
+                          {job.role}
                         </p>
-                        <p className="text-xs italic pr-3">
-                          Posted by: {job.author}{" "}
-                        </p>
+                        <p className="text-xs italic pr-3">Posted by: H.R</p>
                         <div className="">
                           <span className="bg-green-300 rounded italic text-[0.7em] px-1 font-medium mr-3 ">
-                            {job.worktime}
+                            Worktime
                           </span>
                           <span className="bg-green-300 rounded italic text-[0.7em] px-1 font-medium mr-3 ">
-                            {" "}
-                            <i className="fa fa-solid fa-location-dot"></i>{" "}
-                            {job.location}
+                            <i className="fa fa-solid fa-location-dot"></i>
+                            Location
                           </span>
                         </div>
                       </div>
@@ -344,12 +348,12 @@ function JobInfo() {
                     <div className="border-t p-2 text-xs text-[#023e8a] ">
                       <p>{job.description}</p>
                     </div>
-                    <div className="border-t gap-5">
-                      <span className="text-start text-xs p-2 my-1 px-4 text-[#023e8a]">
-                        Published:
+                    <div className="border-t h-fit my-2">
+                      <span className=" text-start text-xs px-4 text-[#023e8a]">
+                        Published:{job.publishedDate}
                       </span>
-                      <span className="text-start text-xs p-2 my-1 px-4 text-[#023e8a]">
-                        Application end:
+                      <span className=" text-start text-xs px-4 text-[#023e8a]">
+                        Application end:{job.applicationEndDate}
                       </span>
                     </div>
                     <div className="border-t  font-semibold p-2 text-end px-4 py-2">

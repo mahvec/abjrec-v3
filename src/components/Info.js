@@ -5,7 +5,7 @@ import { Reveal } from "react-awesome-reveal";
 
 function Info() {
   return (
-    <div className="max-w-[1440px] mx-auto min-h-[400px] justify items-center bg-slate-100 overflow-hidden rounded-xl">
+    <div className="max-w-[1440px] mx-auto min-h-[400px] justify items-center bg-slate-100 overflow-hidden  rounded-tl-[50px] rounded-br-[50px] md:rounded-tl-[100px] md:rounded-br-[100px]">
       <div className=" mx-auto grid md:grid-cols-2 md:h-[500px]  ">
         <>
           <div className="flex flex-col justify-center">
