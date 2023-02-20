@@ -57,7 +57,7 @@ function JobInfo() {
 
   const jobVacancy = filterJobs().map((job) => (
     <Slide key={job.title}>
-      <div className="block rounded-3xl  shadow-xl sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border border-gray-300">
+      <div className="block rounded-3xl  shadow-[0_25px_20px_-15px_rgba(0,0,0,0.4)] sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-300">
         <div className="grid grid-cols-4 gap-4 p-2">
           <div className=" p-1">
             <div className=" rounded-xl h-full bg-gradient-to-r flex  font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
@@ -72,15 +72,6 @@ function JobInfo() {
               {job.role}
             </p>
             <p className="text-xs italic pr-3">Posted by: H.R</p>
-            {/* <div className="">
-              <span className="bg-green-300 rounded italic text-[0.7em] px-1 font-medium mr-3 ">
-                Worktime
-              </span>
-              <span className="bg-green-300 rounded italic text-[0.7em] px-1 font-medium mr-3 ">
-                <i className="fa fa-solid fa-location-dot"></i>
-                Location
-              </span>
-            </div> */}
           </div>
         </div>
         <div className="border-t p-2 text-xs text-[#023e8a] ">

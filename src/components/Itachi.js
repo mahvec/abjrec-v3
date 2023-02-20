@@ -7,7 +7,7 @@ function Itachi() {
   return (
     <>
       <div className="bg-white min-h-[600px] max-w-[1440px] mx-auto items-center justify-center xs:px-0  md:gap-5">
-        <div className="grid md:grid-cols-2  bg-gradient-to-b from-white to-[#d4e7feb8] max-w-[1440px] h-[600px] items-center justify-center rounded-tl-[50px] overflow-hidden md:rounded-br-[100px]">
+        <div className="grid md:grid-cols-2  bg-gradient-to-b from-white to-[#d4e7feb8] max-w-[1440px] h-[600px] items-center justify-center rounded-tl-[50px] overflow-hidden md:rounded-br-[50px]">
           <div className="relative col-span-1  min-w-fit md:w-[50%] h-[400px]">
             <div className="blur-sm absolute top-20 left-2 bg-[#FAFA33] xs:w-20 xs:ml-10 md:w-20 lg:w-52 h-6 rounded-full mix-blend-multiply filter opacity-20 xs:scale-50 md:scale-75  ml-5 mt-3 animate-blob animation-delay-2000"></div>
             <div className="blur-sm absolute top-20 left-32 bg-[#BF40BF] xs:w-20 xs:ml-10 md:w-20 lg:w-52 h-6 rounded-full mix-blend-multiply filter opacity-20 xs:scale-50 md:scale-75  ml-5 mt-3 animate-blob animation-delay-6000"></div>

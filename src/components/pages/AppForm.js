@@ -6,11 +6,11 @@ import { states } from "../State";
 import { Link, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import { number, string } from "yup";
 import Lottie from "react-lottie-player";
 import FormPeople from "../../form-people.json";
 
 const onSubmit = async (values, actions) => {
+  console.log(values);
   await new Promise((resolve) => setTimeout(resolve, 1000));
   actions.resetForm();
 };
@@ -30,15 +30,15 @@ const AppForm = () => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      fullName: string,
-      email: string,
-      phoneNumber: number,
-      address: string,
-      stateCap: string,
-      city: string,
-      position: string,
-      category: string,
-      linkedIn: string,
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      stateCap: "",
+      city: "",
+      position: "",
+      category: "",
+      linkedIn: "",
     },
     validationSchema: basicSchema,
     onSubmit,
@@ -58,6 +58,33 @@ const AppForm = () => {
     handleChange(event);
     handleState(event);
   }
+
+  const [selectedFile, setSelectedFile] = useState([]);
+  const [fileBase64String, setFileBase64String] = useState("");
+
+  function onFileChange(e) {
+    setSelectedFile(e.target.files);
+    console.log(e.target.files[0]);
+    console.log(e.target.files[0].name);
+    console.log(e.target.files[0].size);
+    console.log(e.target.files[0].type);
+  }
+
+  const encodedBase64 = (file) => {
+    var reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const Base64 = reader.result;
+        setFileBase64String(Base64);
+      };
+      reader.onerror = (error) => {
+        console.log("error::: ", error);
+      };
+    }
+  };
+
+  encodedBase64(selectedFile[0]);
 
   return (
     <div>
@@ -142,7 +169,7 @@ const AppForm = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="phoneNumber"
-                  type="number"
+                  type="text"
                   name="phoneNumber"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
@@ -304,8 +331,9 @@ const AppForm = () => {
                 <input
                   id="cv"
                   type="file"
-                  accept=".pdf, .doc, .docx, .txt, .jpg, .psd, .html"
+                  accept=".pdf"
                   required
+                  onChange={onFileChange}
                   className="block w-full mb-5 text-xs text-gray-400 border  p-1 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
                 />
               </div>
@@ -314,6 +342,11 @@ const AppForm = () => {
                 <button
                   disabled={isSubmitting}
                   type="submit"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    encodedBase64(selectedFile[0]);
+                    console.log(fileBase64String);
+                  }}
                   className="bg-blue-800 w-full mt-2 h-10 rounded-lg text-md font-semibold text-white hover:bg-blue-600 shadow-md p-1 px-4 relative items-end"
                 >
                   Submit

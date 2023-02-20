@@ -4,11 +4,11 @@ const Item = ({ Links, title }) => {
   return (
     <div>
       <ul>
-        <h1 className="mb-1 font-semibold font- text-white pb-6">{title}</h1>
+        <h1 className="mb-1 font-bold font- text-[#03256C] py-3">{title}</h1>
         {Links.map((link) => (
-          <li key={link.name}>
+          <li key={link.name} className="py-0.5">
             <a
-              className="text-[#ffffff] hover:text-[#06BEE1] duration-300 text-sm cursor-pointer"
+              className="text-[#03256C] hover:text-[#06BEE1] duration-300 text-xs cursor-pointer"
               href={link.link}
             >
               {link.name}
