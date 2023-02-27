@@ -66,7 +66,7 @@ function Navbar() {
       </div>
 
       {/* BOTTOM NAV */}
-      <div className=" rounded-tl-xl rounded-tr-xl md:hidden flex fixed inset-x-0 bottom-0 z-40 bg-slate-400 shadow items-center justify-evenly h-10 text-xs font-medium">
+      <div className=" rounded-tl-xl rounded-tr-xl md:hidden flex fixed inset-x-0 bottom-0 z-40 bg-slate-400 shadow items-center justify-evenly h-10 text-xs font-medium overflow-hidden">
         <NavLink
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/"

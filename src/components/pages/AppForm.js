@@ -8,17 +8,34 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Lottie from "react-lottie-player";
 import FormPeople from "../../form-people.json";
+import axios from "axios";
 
-const onSubmit = async (values, actions) => {
+const onSubmit = async (values, actions, jobId, { setSubmitting }) => {
   console.log(values);
   await new Promise((resolve) => setTimeout(resolve, 1000));
   actions.resetForm();
-};
 
-// remember to add handleSubmit and error tothe const below
+  axios
+    .post(
+      `https://zen-spence.52-41-168-181.plesk.page/api/v1/job/${jobId}/apply`,
+      values
+    )
+    .then((response) => {
+      console.log(response.data);
+      setSubmitting(false);
+    })
+    .catch((error) => {
+      console.error(error);
+      setSubmitting(false);
+    });
+};
+// remember to add handleSubmit and error to the const below
 const AppForm = () => {
   const { pathname } = useLocation();
+  console.log(pathname);
   const jobRole = pathname.split("/")[2].split("%20").join(" ");
+  const jobId = pathname.split("/")[3];
+  console.log(jobId);
 
   const {
     values,
@@ -39,6 +56,7 @@ const AppForm = () => {
       position: "",
       category: "",
       linkedIn: "",
+      cv: null,
     },
     validationSchema: basicSchema,
     onSubmit,
@@ -64,10 +82,7 @@ const AppForm = () => {
 
   function onFileChange(e) {
     setSelectedFile(e.target.files);
-    console.log(e.target.files[0]);
-    console.log(e.target.files[0].name);
-    console.log(e.target.files[0].size);
-    console.log(e.target.files[0].type);
+    encodedBase64(selectedFile[0]);
   }
 
   const encodedBase64 = (file) => {
@@ -83,8 +98,6 @@ const AppForm = () => {
       };
     }
   };
-
-  encodedBase64(selectedFile[0]);
 
   return (
     <div>
@@ -107,17 +120,22 @@ const AppForm = () => {
         </div>
 
         {/* APPLICATION FORM */}
-        <div className="flex flex-col justify-center  items-center mb-4">
+        <div className="mb-4 flex flex-col justify-center items-center">
           <p className="text-[#03256C] text-md uppercase font-semibold">
             Fill In Your Details
           </p>
-          <div className="w-5/6 p-4">
-            <form
-              onSubmit={handleSubmit}
-              autoComplete="off"
-              className=" w-full border rounded-xl p-3"
-            >
-              <div className="relative z-0 w-full mb-6 group">
+          <div className="w-full p-4">
+            <form onSubmit={handleSubmit} autoComplete="off" className="p-3">
+              <div
+                className="relative z-0 w-full mb-6 group "
+                data-te-input-wrapper-init
+              >
+                <label
+                  htmlFor="fullName"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Full Name
+                </label>
                 <input
                   value={values.fullName}
                   onChange={handleChange}
@@ -125,15 +143,10 @@ const AppForm = () => {
                   id="fullName"
                   type="text"
                   name="fullName"
-                  className="block py-2.5 my-2 px-0 w-full text-xs text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                <label
-                  htmlFor="fullName"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                >
-                  Enter Your Full Name
-                </label>
+
                 {errors.fullName && touched.fullName && (
                   <p className="p-0 text-xs text-[#a62d2d] top-0">
                     {errors.fullName}
@@ -142,6 +155,12 @@ const AppForm = () => {
               </div>
 
               <div className="relative z-0 w-full mb-6 group ">
+                <label
+                  htmlFor="email"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Email
+                </label>
                 <input
                   value={values.email}
                   onChange={handleChange}
@@ -149,37 +168,32 @@ const AppForm = () => {
                   id="email"
                   type="email"
                   name="email"
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                <label
-                  htmlFor="email"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                >
-                  Email address
-                </label>
+
                 {errors.email && touched.email && (
                   <p className="text-xs text-[#a62d2d] top-0">{errors.email}</p>
                 )}
               </div>
 
               <div className="relative z-0 w-full mb-6 group ">
+                <label
+                  htmlFor="phoneNumber"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Phone Number
+                </label>
                 <input
                   value={values.phoneNumber}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="phoneNumber"
-                  type="text"
+                  type="number"
                   name="phoneNumber"
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                <label
-                  htmlFor="phoneNumber"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                >
-                  Phone number (080-****-****)
-                </label>
                 {errors.phoneNumber && touched.phoneNumber && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.phoneNumber}
@@ -188,6 +202,12 @@ const AppForm = () => {
               </div>
 
               <div className="relative z-0 w-full mb-6 group ">
+                <label
+                  htmlFor="address"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Residential Address
+                </label>
                 <input
                   value={values.address}
                   onChange={handleChange}
@@ -198,12 +218,7 @@ const AppForm = () => {
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                <label
-                  htmlFor="address"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                >
-                  Residential Address
-                </label>
+
                 {errors.address && touched.address && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.address}
@@ -226,7 +241,7 @@ const AppForm = () => {
                     id="stateCap"
                     name="stateCap"
                     placeholder="State of Residence"
-                    className="w-full text-sm border-0 border-b-2 text-center capitalize border-gray-300 focus:ring-0 focus:border-blue-600 focus:outline-none bg-transparent"
+                    className="w-full text-sm border-0 border-b-2 capitalize border-gray-300 focus:ring-0 focus:border-blue-600 focus:outline-none bg-transparent"
                   >
                     {states.map(({ state }) => {
                       return (
@@ -274,6 +289,12 @@ const AppForm = () => {
               </div>
 
               <div className="relative z-0 w-full mb-6 group ">
+                <label
+                  htmlFor="role"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Role
+                </label>
                 <input
                   value={jobRole}
                   onChange={handleChange}
@@ -284,12 +305,7 @@ const AppForm = () => {
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                <label
-                  htmlFor="position"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                >
-                  Role
-                </label>
+
                 {errors.position && touched.position && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.position}
@@ -298,6 +314,12 @@ const AppForm = () => {
               </div>
 
               <div className="relative z-0 w-full mb-6 group">
+                <label
+                  htmlFor="linkedIn"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Link to LinkedIn profile
+                </label>
                 <input
                   value={values.linkedIn}
                   onChange={handleChange}
@@ -308,12 +330,7 @@ const AppForm = () => {
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                <label
-                  htmlFor="linkedIn"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                >
-                  Link to LinkedIn profile
-                </label>
+
                 {errors.linkedIn && touched.linkedIn && (
                   <p className="text-xs text-[#a62d2d] top-0">
                     {errors.linkedIn}
@@ -342,11 +359,6 @@ const AppForm = () => {
                 <button
                   disabled={isSubmitting}
                   type="submit"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    encodedBase64(selectedFile[0]);
-                    console.log(fileBase64String);
-                  }}
                   className="bg-blue-800 w-full mt-2 h-10 rounded-lg text-md font-semibold text-white hover:bg-blue-600 shadow-md p-1 px-4 relative items-end"
                 >
                   Submit
@@ -362,5 +374,3 @@ const AppForm = () => {
 };
 
 export default AppForm;
-
-// w-[90%] text-xs mb-2 pl-2 bg-transparent  border-0 border-b-2 shadow-sm border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer

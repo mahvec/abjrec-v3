@@ -4,7 +4,7 @@ import "../App.css";
 function Card() {
   return (
     <div className="">
-      <div className="max-w-[1440px] mx-auto bg-gray-100 p-6 py-20">
+      <div className="max-w-[1440px] mx-auto bg-[#d4e7feb8] p-6 py-20">
         {/* HEADIMG FOR CARD */}
         <h1 className="text-[#03256C] font-bold md:text-3xl sm:text-2xl  text-xl text-center py-6">
           Most Demanded Job Catergories

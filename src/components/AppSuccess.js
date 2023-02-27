@@ -9,7 +9,7 @@ const AppSuccess = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((currentCount) => currentCount - 1);
-    }, 3000);
+    }, 5000);
     // when count is 0, navigate
     count === 0 && navigate("/");
     // clean up the interval

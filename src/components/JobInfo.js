@@ -6,25 +6,33 @@ import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
 import { CATEGORY as CATEGORIES } from "./DropdownList";
 import { Slide } from "react-awesome-reveal";
-import { fetchJobApi } from "../components/JobApi";
 import moment from "moment/moment";
 import NOresult from "../noresult.json";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 function JobInfo() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState(null);
-  // const [data, setData] = useState([]);
-
   const [drop, setDrop] = useState(true);
-
   const handleDrop = () => setDrop(!drop);
-
   const [jobData, setJobData] = useState([]);
 
   useEffect(() => {
-    fetchJobApi().then(({ jobs }) => setJobData(jobs));
+    jobList();
   }, []);
+  const jobList = () => {
+    axios
+      .get("https://zen-spence.52-41-168-181.plesk.page/api/v1/jobs")
+      .then((response) => {
+        const jobs = response.data.jobs;
+        console.log(jobs);
+        setJobData(jobs);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   /**
    * @type {()=> {
@@ -56,7 +64,7 @@ function JobInfo() {
   }, [search, category, jobData]);
 
   const jobVacancy = filterJobs().map((job) => (
-    <Slide key={job.title}>
+    <Slide key={job.id}>
       <div className="block rounded-3xl  shadow-[0_25px_20px_-15px_rgba(0,0,0,0.4)] sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-300">
         <div className="grid grid-cols-4 gap-4 p-2">
           <div className=" p-1">
@@ -88,7 +96,7 @@ function JobInfo() {
         </div>
         <div className="border-t  font-semibold p-2 text-end px-4 py-2">
           <NavLink
-            to={"/form/" + job.title}
+            to={"/form/" + job.title + "/" + job.id}
             className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
           >
             APPLY NOW
