@@ -104,7 +104,7 @@ function JobInfo() {
   };
 
   const jobVacancy = state.filteredJobs.map((job) => (
-    <Slide key={job.id} delay={0.1}>
+    <div key={job.id} delay={0.1}>
       <div className="block rounded-3xl  shadow-lg sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-200">
         <div className="grid grid-cols-5 gap-4 p-2">
           <div className=" p-1">
@@ -147,7 +147,7 @@ function JobInfo() {
           </NavLink>
         </div>
       </div>
-    </Slide>
+    </div>
   ));
 
   return (
@@ -156,7 +156,6 @@ function JobInfo() {
         {/* Search bar */}
         {/* when category dropdown is included then search and categorymust be made into grid */}
         <div className=" md:mx-10 mt-5 mb-8 xs:w-[90%] justify-center items-center max-w-[720px] ">
-          <p>LOADING::: {state.isLoading ? "TRUE" : "FALSE"}</p>
           <form
             action=""
             className="md:col-span-2  h-10 border-2 rounded-lg  grid grid-cols-12 ml-5"
