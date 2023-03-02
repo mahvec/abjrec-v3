@@ -34,7 +34,7 @@ function Navbar() {
           </Link>
         </h1>
         <ul className="hidden md:flex">
-          <li className="p-4 text-sm font-bold w-[80px] px-4">
+          <li className="p-4 text-sm font-bold w-[80px] mr-3 rounded-lg  hover:shadow-md">
             <Link to="/about">About</Link>
           </li>
           <li className="p-4 text-sm w-[140px] bg-[#03256C] rounded-md text-white px-4 font-bold">
