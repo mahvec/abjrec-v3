@@ -20,7 +20,7 @@ function NewsLetter() {
               Subscribe
             </button>
           </div>
-          <p className="text-[#03246c]">
+          <p className="text-black">
             We care about the protection of your data.Read our
             <span className="text-[#16a0bc]"> Privacy Policy</span>
           </p>

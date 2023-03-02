@@ -1,7 +1,7 @@
 import React from "react";
 import { Slide } from "react-awesome-reveal";
 import Typed from "react-typed";
-import Worked from "../assets/images/work-image.jpg";
+import infoPic from "../assets/images/info-pic.jpg";
 
 function Itachi() {
   return (
@@ -30,9 +30,9 @@ function Itachi() {
           </div>
           <div className="xs:px-1 pb-2 md:px-0 my-4">
             <img
-              src={Worked}
+              src={infoPic}
               alt="Worked-logo"
-              className=" md:h-72 md:w-8/12 rounded-3xl mx-auto"
+              className=" md:h-auto md:w-8/12 rounded-3xl mx-auto"
             />
           </div>
         </div>

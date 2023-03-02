@@ -1,12 +1,27 @@
 import * as yup from "yup";
 
 export const basicSchema = yup.object().shape({
-  fullName: yup.string().required("Required"),
+  name: yup.string().required("Required"),
   email: yup.string().email("please enter a valid email").required("Required"),
-  phoneNumber: yup.number().positive().integer().required("Required"),
-  address: yup.string().required("Required"),
-  stateCap: yup.string().required("Required"),
-  city: yup.string().required("Required"),
-  position: yup.string().required("Required"),
-  linkedIn: yup.string().required("Required"),
+  phone: yup.number().positive().integer().required("Required"),
+  cover_letter: yup.string().required("Required"),
+  state: yup.string().required("Required"),
+  local_government: yup.string().required("Required"),
+  resume: yup
+    .mixed()
+    .required("Resume is required")
+    .test("fileSize", "File size is too large", (value) => {
+      if (!value) {
+        return true;
+      }
+      return value.size <= 1024 * 1024 * 7;
+    })
+    .test("fileType", "Only PDF files are allowed", (value) => {
+      if (!value) {
+        return true;
+      }
+      return value.type === "application/pdf";
+    }),
+  linkedin_profile: yup.string().required("Required"),
+  nin: yup.number().positive().integer().required("Required"),
 });

@@ -18,7 +18,7 @@ function Card() {
           >
             <i className="fa fa-sharp fa-solid fa-swatchbook pl-8"></i>
 
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
+            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-medium md:font-bold sm:font-bold">
               Design
             </h2>
           </a>
@@ -29,7 +29,7 @@ function Card() {
           >
             <i className="fa fa-light fa-microchip pl-8"></i>
 
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
+            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-medium md:font-bold sm:font-bold">
               Technology
             </h2>
           </a>
@@ -40,7 +40,7 @@ function Card() {
           >
             <i className="fa fa-solid fa-money-bill-trend-up pl-8"></i>
 
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
+            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-medium md:font-bold sm:font-bold">
               Marketing
             </h2>
           </a>
@@ -51,7 +51,7 @@ function Card() {
           >
             <i className="fa fa-solid fa-coins pl-8"></i>
 
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
+            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-medium md:font-bold sm:font-bold">
               Finance
             </h2>
           </a>
@@ -59,42 +59,22 @@ function Card() {
             href="/job"
             className="flex flex-col bg-white rounded-lg shadow-lg w-full m-6 h-32 justify-center overflow-hidden card-css  transition duration-500 text-[#03256C] sm:w-52 xs:scale-110 lg:scale-110"
           >
-            <i className="fa fa-solid fa-coins pl-8"></i>
+            <i className="fa fa-solid fa-user pl-8"></i>
 
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
-              Finance
+            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-medium md:font-bold sm:font-bold">
+              Human Resource
             </h2>
           </a>
           <a
             href="/job"
             className="flex flex-col bg-white rounded-lg shadow-lg w-full m-6 h-32 justify-center overflow-hidden card-css  transition duration-500 text-[#03256C] sm:w-52 xs:scale-110 lg:scale-110"
           >
-            <i className="fa fa-solid fa-coins pl-8"></i>
+            <i className="fa fa-solid fa-building pl-8"></i>
 
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
-              Finance
+            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-medium md:font-bold sm:font-bold">
+              Facality Management
             </h2>
           </a>
-          {/* <a
-            href="/job"
-            className="flex flex-col bg-white rounded-lg shadow-lg w-full m-6 h-32 justify-center overflow-hidden card-css transition duration-500 text-[#03256C] sm:w-52 xs:scale-110 lg:scale-110"
-          >
-            <i className="fa fa-solid fa-coins pl-8"></i>
-
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
-              Finance
-            </h2>
-          </a> */}
-          {/* <a
-            href="/job"
-            className="flex flex-col bg-white rounded-lg shadow-lg w-full m-6 h-32 justify-center overflow-hidden card-css transition duration-500 text-[#03256C] sm:w-52 xs:scale-110 lg:scale-110"
-          >
-            <i className="fa fa-solid fa-coins pl-8"></i>
-
-            <h2 className="text-center px-2 mt-12 md:text-lg sm:text-xs md:lg:font-bold xs:text-xs xs:font-light md:font-bold sm:font-bold">
-              Finance
-            </h2>
-          </a> */}
         </div>
       </div>
     </div>

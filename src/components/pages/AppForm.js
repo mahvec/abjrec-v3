@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../../schemas/schemaIndex";
+import * as yup from "yup";
 import "./App1.css";
 import { states } from "../State";
 import { Link, useLocation } from "react-router-dom";
@@ -10,32 +11,51 @@ import Lottie from "react-lottie-player";
 import FormPeople from "../../form-people.json";
 import axios from "axios";
 
-const onSubmit = async (values, actions, jobId, { setSubmitting }) => {
-  console.log(values);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-
-  axios
-    .post(
-      `https://zen-spence.52-41-168-181.plesk.page/api/v1/job/${jobId}/apply`,
-      values
-    )
-    .then((response) => {
-      console.log(response.data);
-      setSubmitting(false);
-    })
-    .catch((error) => {
-      console.error(error);
-      setSubmitting(false);
-    });
-};
-// remember to add handleSubmit and error to the const below
 const AppForm = () => {
+  // const onSubmit = async (values, actions, jobId, { setSubmitting }) => {
+  //   console.log(values);
+  //   await new Promise((resolve) => setTimeout(resolve, 1000));
+  //   actions.resetForm();
+
+  //   const formData = new FormData();
+  //   formData.append("name", values.name);
+  //   formData.append("email", values.email);
+  //   formData.append("phone", values.phone);
+  //   formData.append("cover_letter", values.cover_letter);
+  //   formData.append("state", values.state);
+  //   formData.append("local_government", values.local_government);
+  //   formData.append("resume", values.resume);
+  //   formData.append("linkedin_profile", values.linkedin_profile);
+  //   formData.append("nin", values.nin);
+  //   axios
+  //     .post(
+  //       `https://zen-spence.52-41-168-181.plesk.page/api/v1/job/${jobId}/apply`,
+  //       formData
+  //     )
+  //     .then((response) => {
+  //       console.log(formData);
+  //       setSubmitting(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setSubmitting(false);
+  //     });
+  // };
+
+  const onSubmit = (values, action) => {
+    console.log(values);
+    console.log(action);
+  };
+
   const { pathname } = useLocation();
-  console.log(pathname);
   const jobRole = pathname.split("/")[2].split("%20").join(" ");
   const jobId = pathname.split("/")[3];
-  console.log(jobId);
+
+  const [jobhi, setJobhi] = useState("");
+  function handleChanger(e) {
+    setJobhi(e.target.value);
+  }
+  // console.log(jobhi);
 
   const {
     values,
@@ -47,16 +67,15 @@ const AppForm = () => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      fullName: "",
+      name: "",
       email: "",
-      phoneNumber: "",
-      address: "",
-      stateCap: "",
-      city: "",
-      position: "",
-      category: "",
-      linkedIn: "",
-      cv: null,
+      phone: "",
+      cover_letter: "",
+      state: "",
+      local_government: "",
+      resume: null,
+      linkedin_profile: "",
+      nin: "",
     },
     validationSchema: basicSchema,
     onSubmit,
@@ -77,26 +96,26 @@ const AppForm = () => {
     handleState(event);
   }
 
-  const [selectedFile, setSelectedFile] = useState([]);
-  const [fileBase64String, setFileBase64String] = useState("");
+  const uploadPdf = async (e) => {
+    console.log(e.target.files);
+    const file = e.target.files[0];
+    const Base64 = await convertBase64(file);
+    console.log(Base64);
+  };
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
 
-  function onFileChange(e) {
-    setSelectedFile(e.target.files);
-    encodedBase64(selectedFile[0]);
-  }
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
 
-  const encodedBase64 = (file) => {
-    var reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const Base64 = reader.result;
-        setFileBase64String(Base64);
+      fileReader.onerror = (error) => {
+        reject(error);
       };
-      reader.onerror = (error) => {
-        console.log("error::: ", error);
-      };
-    }
+
+      fileReader.readAsDataURL(file);
+    });
   };
 
   return (
@@ -126,34 +145,36 @@ const AppForm = () => {
           </p>
           <div className="w-full p-4">
             <form onSubmit={handleSubmit} autoComplete="off" className="p-3">
+              {/* FULL NAME */}
               <div
                 className="relative z-0 w-full mb-6 group "
                 data-te-input-wrapper-init
               >
                 <label
-                  htmlFor="fullName"
+                  htmlFor="name"
                   className="text-xs font-semibold text-gray-500 focus:text-blue-600"
                 >
                   Full Name
                 </label>
                 <input
-                  value={values.fullName}
+                  value={values.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  id="fullName"
+                  id="name"
                   type="text"
-                  name="fullName"
+                  name="name"
                   className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
 
-                {errors.fullName && touched.fullName && (
+                {errors.name && touched.name && (
                   <p className="p-0 text-xs text-[#a62d2d] top-0">
-                    {errors.fullName}
+                    {errors.name}
                   </p>
                 )}
               </div>
 
+              {/* EMAIL */}
               <div className="relative z-0 w-full mb-6 group ">
                 <label
                   htmlFor="email"
@@ -177,31 +198,31 @@ const AppForm = () => {
                 )}
               </div>
 
+              {/* PHONE NUMBER */}
               <div className="relative z-0 w-full mb-6 group ">
                 <label
-                  htmlFor="phoneNumber"
+                  htmlFor="phone"
                   className="text-xs font-semibold text-gray-500 focus:text-blue-600"
                 >
                   Phone Number
                 </label>
                 <input
-                  value={values.phoneNumber}
+                  value={values.phone}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  id="phoneNumber"
+                  id="phone"
                   type="number"
-                  name="phoneNumber"
+                  name="phone"
                   className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
-                {errors.phoneNumber && touched.phoneNumber && (
-                  <p className="text-xs text-[#a62d2d] top-0">
-                    {errors.phoneNumber}
-                  </p>
+                {errors.phone && touched.phone && (
+                  <p className="text-xs text-[#a62d2d] top-0">{errors.phone}</p>
                 )}
               </div>
 
-              <div className="relative z-0 w-full mb-6 group ">
+              {/* ADDRESS */}
+              {/* <div className="relative z-0 w-full mb-6 group ">
                 <label
                   htmlFor="address"
                   className="text-xs font-semibold text-gray-500 focus:text-blue-600"
@@ -224,8 +245,36 @@ const AppForm = () => {
                     {errors.address}
                   </p>
                 )}
+              </div> */}
+
+              {/* ROLE */}
+              <div className="relative z-0 w-full mb-6 group ">
+                <label
+                  htmlFor="role"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                >
+                  Role
+                </label>
+                <input
+                  key={jobId}
+                  value={jobRole}
+                  onChange={handleChanger}
+                  onBlur={handleBlur}
+                  id="cover_letter"
+                  type="text"
+                  name="cover_letter"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
+                />
+
+                {errors.cover_letter && touched.cover_letter && (
+                  <p className="text-xs text-[#a62d2d] top-0">
+                    {errors.cover_letter}
+                  </p>
+                )}
               </div>
 
+              {/* STATE & LOCAL_GOVERNMENT */}
               <div className="grid md:grid-cols-2 md:gap-4">
                 <div className="relative z-0 w-full mb-6 group">
                   <label
@@ -235,11 +284,11 @@ const AppForm = () => {
                     State of Residence
                   </label>
                   <select
-                    value={values.stateCap}
+                    value={values.state}
                     onChange={stateHandleOnChange}
                     onBlur={handleBlur}
-                    id="stateCap"
-                    name="stateCap"
+                    id="state"
+                    name="state"
                     placeholder="State of Residence"
                     className="w-full text-sm border-0 border-b-2 capitalize border-gray-300 focus:ring-0 focus:border-blue-600 focus:outline-none bg-transparent"
                   >
@@ -251,25 +300,25 @@ const AppForm = () => {
                       );
                     })}
                   </select>
-                  {errors.stateCap && touched.stateCap && (
+                  {errors.state && touched.state && (
                     <p className="text-xs text-[#a62d2d] top-0">
-                      {errors.stateCap}
+                      {errors.state}
                     </p>
                   )}
                 </div>
 
                 <div className="relative z-0 w-full mb-6 group ">
                   <label
-                    htmlFor="city"
+                    htmlFor="capital"
                     className="text-xs font-semibold text-gray-500"
                   >
                     LGA
                   </label>
                   <select
-                    value={values.city}
+                    value={values.local_government}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    id="city"
+                    id="local_government"
                     className="w-full text-sm border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-blue-600 focus:outline-none bg-transparent"
                   >
                     {lga.map((lg) => {
@@ -280,79 +329,81 @@ const AppForm = () => {
                       );
                     })}
                   </select>
-                  {errors.city && touched.city && (
+                  {errors.local_government && touched.local_government && (
                     <p className="text-xs text-[#a62d2d] top-0">
-                      {errors.city}
+                      {errors.local_government}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="relative z-0 w-full mb-6 group ">
+              {/* RESUME */}
+              <div>
                 <label
-                  htmlFor="role"
-                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
+                  className="block mb-2 text-xs text-gray-500  "
+                  htmlFor="resume"
                 >
-                  Role
+                  Upload CV here
                 </label>
                 <input
-                  value={jobRole}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  id="postion"
-                  type="text"
-                  name="position"
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                  placeholder=" "
+                  id="resume"
+                  type="file"
+                  accept=".pdf"
+                  required
+                  // onChange={onFileChange}
+                  onChange={(e) => {
+                    uploadPdf(e);
+                  }}
+                  className="block w-full mb-5 text-xs text-gray-400 border  p-1 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
                 />
-
-                {errors.position && touched.position && (
-                  <p className="text-xs text-[#a62d2d] top-0">
-                    {errors.position}
-                  </p>
-                )}
               </div>
 
+              {/* //linked in // */}
               <div className="relative z-0 w-full mb-6 group">
                 <label
-                  htmlFor="linkedIn"
+                  htmlFor="linkedin_profile"
                   className="text-xs font-semibold text-gray-500 focus:text-blue-600"
                 >
                   Link to LinkedIn profile
                 </label>
                 <input
-                  value={values.linkedIn}
+                  value={values.linkedin_profile}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  id="linkedIn"
+                  id="linkedin_profile"
                   type="text"
-                  name="linkedIn"
+                  name="linkedin_profile"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                 />
 
-                {errors.linkedIn && touched.linkedIn && (
+                {errors.linkedin_profile && touched.linkedin_profile && (
                   <p className="text-xs text-[#a62d2d] top-0">
-                    {errors.linkedIn}
+                    {errors.linkedin_profile}
                   </p>
                 )}
               </div>
 
-              <div>
+              <div className="relative z-0 w-full mb-6 group ">
                 <label
-                  className="block mb-2 text-xs text-gray-500  "
-                  htmlFor="cv"
+                  htmlFor="nin"
+                  className="text-xs font-semibold text-gray-500 focus:text-blue-600"
                 >
-                  Upload CV here
+                  NIN
                 </label>
                 <input
-                  id="cv"
-                  type="file"
-                  accept=".pdf"
-                  required
-                  onChange={onFileChange}
-                  className="block w-full mb-5 text-xs text-gray-400 border  p-1 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
+                  value={values.nin}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id="nin"
+                  type="number"
+                  name="nin"
+                  className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
                 />
+                {errors.nin && touched.nin && (
+                  <p className="text-xs text-[#a62d2d] top-0">{errors.nin}</p>
+                )}
               </div>
 
               <Link to="/success">

@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import { MdFindInPage } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
+import AbujaLogo from "../assets/images/abujalogo.png";
 
 function Navbar() {
   const [nav, setNav] = useState(true);
@@ -14,8 +15,7 @@ function Navbar() {
   const handleNav = () => setNav(!nav);
 
   const activeStyle = {
-    backgroundColor: "#2D3142",
-    color: "#ffffff",
+    color: "#ff4e00",
     height: "45px",
     transition: "all 2s ease-in-out 0.5s",
   };
@@ -25,10 +25,16 @@ function Navbar() {
       <div className="flex justify-between items-center h-16 max-w-[1440px] mx-auto px-4 text-[#03256C]">
         {/* MAIN NAV BAR */}
         <h1 className="md:text-2xl xs:sm:md:text-2xl text-xl w-full text-[#03256C]  font-bold">
-          <Link to="/">Abuja Recruiter</Link>
+          <Link to="/">
+            <img
+              src={AbujaLogo}
+              alt="Abuja Recruiter"
+              className="w-24 h-auto"
+            />
+          </Link>
         </h1>
         <ul className="hidden md:flex">
-          <li className="p-4 text-sm font-bold pr-6">
+          <li className="p-4 text-sm font-bold w-[80px] px-4">
             <Link to="/about">About</Link>
           </li>
           <li className="p-4 text-sm w-[140px] bg-[#03256C] rounded-md text-white px-4 font-bold">
@@ -51,7 +57,11 @@ function Navbar() {
         >
           <h1 className="w-full xs:w-full text-[#03256C] text-3xl font-bold m-6 bg-white">
             <Link to="/" className="xs:text-xl">
-              Abuja Recruiter
+              <img
+                src={AbujaLogo}
+                alt="Abuja Recruiter"
+                className="w-24 h-auto"
+              />
             </Link>
           </h1>
           <ul className="pt-10 uppercase p-4">
@@ -66,11 +76,11 @@ function Navbar() {
       </div>
 
       {/* BOTTOM NAV */}
-      <div className=" rounded-tl-xl rounded-tr-xl md:hidden flex fixed inset-x-0 bottom-0 z-40 bg-slate-400 shadow items-center justify-evenly h-10 text-xs font-medium overflow-hidden">
+      <div className=" rounded-tl-xl rounded-tr-xl md:hidden flex fixed inset-x-0 bottom-0 z-40 bg-slate-300 shadow items-center justify-evenly h-10 text-xs font-medium overflow-hidden">
         <NavLink
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/"
-          className=" w-24 items-center  text-center text-[#03256C] bg-slate-400 rounded-tl-xl rounded-tr-xl h-full mt-3"
+          className=" w-24 items-center  text-center text-[#03256C]  rounded-tl-xl rounded-tr-xl h-full mt-3"
         >
           <AiFillHome className="ml-10 active:border-2 active:rounder-md" />
           Home
@@ -78,7 +88,7 @@ function Navbar() {
         <NavLink
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/about"
-          className=" w-24 items-center  text-center text-[#03256C] bg-slate-400 rounded-tl-xl rounded-tr-xl h-full mt-3"
+          className=" w-24 items-center  text-center text-[#03256C]  rounded-tl-xl rounded-tr-xl h-full mt-3"
         >
           <AiFillInfoCircle className="ml-10 active:border-2 active:rounder-md" />
           About
@@ -86,7 +96,7 @@ function Navbar() {
         <NavLink
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
           to="/job"
-          className=" w-24 items-center  text-center text-[#03256C] bg-slate-400 rounded-tl-xl rounded-tr-xl h-full mt-3"
+          className=" w-24 items-center  text-center text-[#03256C]  rounded-tl-xl rounded-tr-xl h-full mt-3"
         >
           <MdFindInPage className="ml-10 active:border-2 active:rounder-md" />
           Find Job

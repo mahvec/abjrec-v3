@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Lottie from "react-lottie-player";
 import GirlLottie from "../assets/girl.json";
 
@@ -18,11 +18,10 @@ function AboutInfo() {
           <h1 className="text-[#03256C] md:text-4xl sm:text-3xl  text-2xl font-bold py-2">
             Abuja Recruiter
           </h1>
-          <p className="text-[#1768AC] ">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+          <p className="text-black text-sm">
+            At Abuja Recruiter, we believe in the importance of living our
+            values. We believe that by living our values, we can create a
+            workplace culture that is positive, supportive, and innovative.
           </p>
         </div>
       </div>
@@ -30,4 +29,4 @@ function AboutInfo() {
   );
 }
 
-export default AboutInfo
+export default AboutInfo;

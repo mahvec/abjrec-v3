@@ -10,6 +10,8 @@ import moment from "moment/moment";
 import NOresult from "../noresult.json";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
+import AbujaIcon from "../assets/images/abujaicon.png";
 
 function JobInfo() {
   const [search, setSearch] = useState("");
@@ -17,6 +19,8 @@ function JobInfo() {
   const [drop, setDrop] = useState(true);
   const handleDrop = () => setDrop(!drop);
   const [jobData, setJobData] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const jobsPerPage = 5;
 
   useEffect(() => {
     jobList();
@@ -26,7 +30,6 @@ function JobInfo() {
       .get("https://zen-spence.52-41-168-181.plesk.page/api/v1/jobs")
       .then((response) => {
         const jobs = response.data.jobs;
-        console.log(jobs);
         setJobData(jobs);
       })
       .catch((error) => {
@@ -52,28 +55,38 @@ function JobInfo() {
       );
     } else {
       const jc = jobData.filter((job) => {
-        return category === null
-          ? true
-          : job.category
-              .toLowerCase()
-              .includes(category?.name?.toLowerCase() ?? "");
+        return (
+          category === null ||
+          job.category?.name
+            ?.toLowerCase()
+            .includes(category.name.toLowerCase())
+        );
       });
-      console.log(jc);
-      return jc;
+
+      const offset = pageNumber * jobsPerPage;
+      const currentJobs = jc.slice(offset, offset + jobsPerPage);
+
+      return currentJobs;
     }
-  }, [search, category, jobData]);
+  }, [search, category, jobData, pageNumber]);
+
+  const handlePageClick = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   const jobVacancy = filterJobs().map((job) => (
     <Slide key={job.id}>
-      <div className="block rounded-3xl  shadow-[0_25px_20px_-15px_rgba(0,0,0,0.4)] sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-300">
-        <div className="grid grid-cols-4 gap-4 p-2">
+      <div className="block rounded-3xl  shadow-lg sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-200">
+        <div className="grid grid-cols-5 gap-4 p-2">
           <div className=" p-1">
             <div className=" rounded-xl h-full bg-gradient-to-r flex  font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
-              <p className="m-auto">INI</p>
+              <div className="m-auto">
+                <img src={AbujaIcon} alt="" className="h-14 w-auto" />
+              </div>
             </div>
           </div>
-          <div className="col-span-3 mb-1">
-            <p className="font-bold text-md md:text-lg lg:text-xl left uppercase text-[#023e8a] mr-1 ">
+          <div className="col-span-4 mb-1">
+            <p className="font-bold text-md md:text-lg lg:text-xl left uppercase text-black mr-1 ">
               {job.title}
             </p>
             <p className="text-sm font-semibold pr-1 text-[#E40066]">
@@ -82,21 +95,21 @@ function JobInfo() {
             <p className="text-xs italic pr-3">Posted by: H.R</p>
           </div>
         </div>
-        <div className="border-t p-2 text-xs text-[#023e8a] ">
+        <div className="border-t p-2 text-xs text-black ">
           <p>{job.description}</p>
         </div>
         <div className="border-t h-fit my-2">
-          <p className=" text-start text-xs px-2 text-[#023e8a]">
+          <p className=" text-start text-xs px-2 text-black">
             Published: {moment(job.publishedDate).format("DD/MM/YYYY")}
           </p>
-          <p className=" text-start text-xs px-2 text-[#023e8a]">
+          <p className=" text-start text-xs px-2 text-black">
             Application end:
             {moment(job.applicationEndDate).format("DD/MM/YYYY")}
           </p>
         </div>
         <div className="border-t  font-semibold p-2 text-end px-4 py-2">
           <NavLink
-            to={"/form/" + job.title + "/" + job.id}
+            to={"/formpage/" + job.title + "/" + job.id}
             className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
           >
             APPLY NOW
@@ -110,8 +123,8 @@ function JobInfo() {
     <div>
       <div className="max-w-[1440px] mx-auto">
         {/* Search bar */}
-
-        <div className="md:grid md:grid-cols-3  md:gap-2 md:mx-10 mt-5 mb-8 xs:w-[90%] justify-center items-center max-w-[720px] ">
+        {/* when category dropdown is included then search and categorymust be made into grid */}
+        <div className=" md:mx-10 mt-5 mb-8 xs:w-[90%] justify-center items-center max-w-[720px] ">
           <form
             action=""
             className="md:col-span-2  h-10 border-2 rounded-lg  grid grid-cols-12 ml-5"
@@ -128,7 +141,7 @@ function JobInfo() {
 
               {/* toggle for filter on mobile view */}
             </span>
-            <span
+            {/* <span
               onClick={handleDrop}
               className="block md:hidden w-fit col-span-1 m-auto"
             >
@@ -137,44 +150,13 @@ function JobInfo() {
               ) : (
                 <BsFilterCircle size={19} />
               )}
-            </span>
+            </span> */}
           </form>
-          <div className="xs:hidden md:block">
-            {/* <p className="text-[#023e8a] text-xs mb-1 w-fit font-bold pl-5">
-              Category
-            </p> */}
-            <select
-              name=""
-              id=""
-              placeholder="Category"
-              value={category?.id ?? ""}
-              onChange={(e) => {
-                setSearch("");
-                setCategory(
-                  CATEGORIES.find((c) => c.id === e.target.value) ??
-                    CATEGORIES[0]
-                );
-              }}
-              className="w-full h-10 border-2 rounded-lg text-sm text-gray-400 py-1 outline-none"
-            >
-              {CATEGORIES.map((item) => {
-                return (
-                  <option
-                    className="rounded font-semibold px-2 text-[#023e8a]"
-                    key={item.id}
-                    value={item.id}
-                  >
-                    {item.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
         </div>
 
         {/* DROPDOWN ON MOBILE VIEW */}
 
-        <div className="relative mx-4">
+        {/* <div className="relative mx-4">
           <div
             className={
               !drop
@@ -218,7 +200,7 @@ function JobInfo() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* LIST FOR JOB VACANCY */}
@@ -239,11 +221,29 @@ function JobInfo() {
           ) : (
             jobVacancy
           )}
+
+          <ReactPaginate
+            pageCount={Math.ceil(filterJobs.length / jobsPerPage)}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageClick}
+            containerClassName={"flex justify-center mt-8 mb-6"}
+            pageClassName={
+              "mx-2 p-2 rounded-lg border-2 hover:bg-blue-500 hover:text-white font-medium text-gray-500 cursor-pointer"
+            }
+            previousClassName={
+              "mx-2 p-2 rounded-lg border-2 hover:bg-blue-500 hover:text-white font-medium text-gray-500 cursor-pointer"
+            }
+            nextClassName={
+              "mx-2 p-2 rounded-lg border-2 hover:bg-blue-500 hover:text-white font-medium text-gray-500 cursor-pointer"
+            }
+            activeClassName={"bg-blue-500 text-white "}
+          />
         </div>
 
         {/* SIDE LOTTIE */}
 
-        <div className="flex flex-col col-span-1 xs:hidden sm:block lg:w-3/4 mb-4">
+        <div className="flex flex-col col-span-1 xs:hidden md:block lg:w-3/4 mb-4">
           <div className="rounded-lg shadow-lg bg-white md:w-40 lg:w-50 lg:min-w-fit lg:mx-auto ml-5 border border-gray-300 mt-3 ">
             <Lottie
               loop
@@ -255,7 +255,7 @@ function JobInfo() {
               <h5 className="text-sm font-bold text-[#023e8a] ">
                 LOREM IPSUM IS MY PLACE OF WORK
               </h5>
-              <p className="font-medium text-xs text-[#0077b6]">
+              <p className="font-medium text-xs text-black">
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
@@ -272,9 +272,11 @@ function JobInfo() {
               <h5 className="text-sm font-bold text-[#023e8a] ">
                 LOREM IPSUM IS MY PLACE OF WORK
               </h5>
-              <p className="font-medium text-xs text-[#0077b6]">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+              <p className="font-medium text-xs text-black">
+                To apply for a position at Abuja Recruiter, simply click on the
+                APPLY button on your prefered job. Our recruitment team will
+                review your application, and if you are selected to move forward
+                in the process, you will be contacted to schedule an interview
               </p>
             </div>
           </div>
