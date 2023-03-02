@@ -121,7 +121,7 @@ function FormPage() {
                   htmlFor="name"
                   className="text-sm font-semibold text-gray-600 focus:text-blue-600"
                 >
-                  Full name
+                  Full Name
                 </label>
                 <input
                   type="text"
