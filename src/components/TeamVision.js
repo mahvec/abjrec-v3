@@ -9,7 +9,7 @@ const TeamVision = () => {
           <p className="text-[#03256C] text-lg md:text-xl lg:text-3xl font-bold py-3 capitalize">
             Be part of our mission
           </p>
-          <p className="text-gray-800 italic font-medium text-sm p-2">
+          <p className="text-black italic font-medium text-sm p-2">
             ~We're looking for passionate people to join us on our mission. We
             value flat hierarchies, <br></br>clear comminunication, and full
             ownership and responsibility.~

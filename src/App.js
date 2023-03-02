@@ -4,7 +4,6 @@ import Home from "./Home";
 import About from "./components/pages/About";
 import Job from "./components/pages/Job";
 import "./App.css";
-import AppForm from "./components/pages/AppForm";
 import AppSuccess from "./components/AppSuccess";
 import FormPage from "./components/pages/FormPage";
 
@@ -16,7 +15,6 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/job" element={<Job />} />
-          <Route path="/form" element={<AppForm />} />
           <Route path="/success" element={<AppSuccess />} />
           <Route path="/formpage/:title/:id" element={<FormPage />} />
         </Routes>

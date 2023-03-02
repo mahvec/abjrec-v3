@@ -1,6 +1,5 @@
 import React from "react";
 import { Slide } from "react-awesome-reveal";
-import Typed from "react-typed";
 import infoPic from "../assets/images/info-pic.jpg";
 
 function Itachi() {
@@ -16,15 +15,9 @@ function Itachi() {
               <h1 className=" xs:pt-0 md:text-3xl lg:text-2xl sm:text-2xl text-xl font-bold pt-32 py-9 pb-10 my-10 px-20 text-[#03256C] overflow-hidden">
                 <Slide>WE ARE NOT YOUR TYPICAL JOB SITE</Slide>
               </h1>
-              <p className="pt-5 text-[#2541B2] text-center xs:pr-10 align-center ">
-                <Typed
-                  strings={[
-                    "Abuja Recruiter is makes it easier to find your next great opportunity.",
-                  ]}
-                  typeSpeed={50}
-                  loop
-                  className="xs:text-sm font-semibold md:text-lg lg:text-xl mx-10 text-center"
-                />
+              <p className="pt-5 text-black text-center xs:pr-10 align-center xs:text-sm font-medium md:text-md lg:text-lg mx-10 ">
+                Abuja Recruiter is makes it easier to find your next great
+                opportunity.
               </p>
             </div>
           </div>

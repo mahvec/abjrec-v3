@@ -18,7 +18,7 @@ function AboutInfo() {
           <h1 className="text-[#03256C] md:text-4xl sm:text-3xl  text-2xl font-bold py-2">
             Abuja Recruiter
           </h1>
-          <p className="text-black text-sm">
+          <p className="text-black text-md font-medium">
             At Abuja Recruiter, we believe in the importance of living our
             values. We believe that by living our values, we can create a
             workplace culture that is positive, supportive, and innovative.

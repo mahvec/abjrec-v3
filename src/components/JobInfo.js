@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { BsFilterCircle } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
+// import { BsFilterCircle } from "react-icons/bs";
+// import { AiOutlineClose } from "react-icons/ai";
 import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
-import { CATEGORY as CATEGORIES } from "./DropdownList";
+// import { CATEGORY as CATEGORIES } from "./DropdownList";
 import { Slide } from "react-awesome-reveal";
 import moment from "moment/moment";
 import NOresult from "../noresult.json";
@@ -16,8 +16,8 @@ import AbujaIcon from "../assets/images/abujaicon.png";
 function JobInfo() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState(null);
-  const [drop, setDrop] = useState(true);
-  const handleDrop = () => setDrop(!drop);
+  // const [drop, setDrop] = useState(true);
+  // const handleDrop = () => setDrop(!drop);
   const [jobData, setJobData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const jobsPerPage = 5;
@@ -252,12 +252,12 @@ function JobInfo() {
               className="mx-auto my-4 md:w-fit md:h-auto"
             />
             <div className="p-6 xs:pr-3">
-              <h5 className="text-sm font-bold text-[#023e8a] ">
-                LOREM IPSUM IS MY PLACE OF WORK
-              </h5>
               <p className="font-medium text-xs text-black">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                At Abuja Recruiter, we value diversity and are committed to
+                creating an inclusive workplace that welcomes individuals of all
+                backgrounds. We believe that embracing diversity leads to a
+                culture of creativity and collaboration, where unique
+                perspectives and experiences are celebrated.
               </p>
             </div>
           </div>
@@ -269,9 +269,6 @@ function JobInfo() {
               className="mx-auto my-4 md:h-auto sm:w-fit"
             />
             <div className="p-6 xs:pr-3">
-              <h5 className="text-sm font-bold text-[#023e8a] ">
-                LOREM IPSUM IS MY PLACE OF WORK
-              </h5>
               <p className="font-medium text-xs text-black">
                 To apply for a position at Abuja Recruiter, simply click on the
                 APPLY button on your prefered job. Our recruitment team will
