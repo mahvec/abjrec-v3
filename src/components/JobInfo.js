@@ -14,68 +14,97 @@ import ReactPaginate from "react-paginate";
 import AbujaIcon from "../assets/images/abujaicon.png";
 
 function JobInfo() {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [category] = useState(null);
   // const [drop, setDrop] = useState(true);
   // const handleDrop = () => setDrop(!drop);
-  const [jobData, setJobData] = useState([]);
+  // const [jobData, setJobData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const jobsPerPage = 5;
+
+  const [state, setState] = useState({
+    search: "",
+    category: null,
+    jobData: [],
+    filteredJobs: [],
+    pageNumber: 0,
+
+    isLoading: false,
+  });
 
   useEffect(() => {
     jobList();
   }, []);
-  const jobList = () => {
-    axios
-      .get("https://zen-spence.52-41-168-181.plesk.page/api/v1/jobs")
-      .then((response) => {
-        const jobs = response.data.jobs;
-        setJobData(jobs);
-      })
-      .catch((error) => {
-        console.log(error);
+
+  const jobList = async () => {
+    setState((prevState) => ({
+      ...prevState,
+      isLoading: true,
+    }));
+    console.log("LOADING::: ", state.isLoading);
+
+    try {
+      const response = await axios({
+        method: "GET",
+        url: "https://zen-spence.52-41-168-181.plesk.page/api/v1/jobs",
+        headers: {
+          Accept: "application/json",
+        },
       });
+
+      if (response.status === 200) {
+        const jobs = response.data.jobs;
+        setState((prevState) => ({
+          ...prevState,
+          jobData: jobs,
+          filteredJobs: jobs,
+          isLoading: false,
+        }));
+      }
+      console.log("RESPONSE::: ", response);
+      console.log("LOADING::: ", state.isLoading);
+    } catch (error) {
+      let errorMessage;
+      if (error.errors) {
+        errorMessage = error.errors[0];
+        console.log(errorMessage);
+      } else {
+        errorMessage = error.response.data.message;
+        console.log(errorMessage);
+      }
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: false,
+      }));
+      console.log(error);
+    }
   };
 
-  /**
-   * @type {()=> {
-   * title: string;
-   * author: string;
-   * worktime: string;
-   * location: string;
-   * category: string;
-   * initials: string;
-   * description: string;
-   * }[]}
-   */
-  const filterJobs = useCallback(() => {
-    if (search !== "") {
-      return jobData.filter((job) =>
-        job.title.toLowerCase().includes(search.toLowerCase())
+  const myJobs = () => {
+    if (state.search !== "") {
+      const jobs = state.jobData.filter((job) =>
+        job.title.toLowerCase().includes(state.search.toLowerCase())
       );
-    } else {
-      const jc = jobData.filter((job) => {
-        return (
-          category === null ||
-          job.category?.name
-            ?.toLowerCase()
-            .includes(category.name.toLowerCase())
-        );
-      });
 
       const offset = pageNumber * jobsPerPage;
-      const currentJobs = jc.slice(offset, offset + jobsPerPage);
+      const currentJobs = jobs.slice(offset, offset + jobsPerPage);
 
-      return currentJobs;
+      return setState((prevState) => ({
+        ...prevState,
+        filteredJobs: currentJobs,
+      }));
     }
-  }, [search, category, jobData, pageNumber]);
-
-  const handlePageClick = ({ selected }) => {
-    setPageNumber(selected);
   };
 
-  const jobVacancy = filterJobs().map((job) => (
-    <Slide key={job.id}>
+  const handlePageClick = (selected) => {
+    setState((prevState) => ({
+      ...prevState,
+      pageNumber: selected,
+    }));
+  };
+
+  const jobVacancy = state.filteredJobs.map((job) => (
+    <Slide key={job.id} delay={0.1}>
       <div className="block rounded-3xl  shadow-lg sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-200">
         <div className="grid grid-cols-5 gap-4 p-2">
           <div className=" p-1">
@@ -109,7 +138,9 @@ function JobInfo() {
         </div>
         <div className="border-t  font-semibold p-2 text-end px-4 py-2">
           <NavLink
-            to={"/formpage/" + job.title + "/" + job.id}
+            // to={"/formpage/" + job.title + "/" + job.id}
+            to={{ pathname: `/formpage/${job.id}` }}
+            state={{ job }}
             className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
           >
             APPLY NOW
@@ -125,6 +156,7 @@ function JobInfo() {
         {/* Search bar */}
         {/* when category dropdown is included then search and categorymust be made into grid */}
         <div className=" md:mx-10 mt-5 mb-8 xs:w-[90%] justify-center items-center max-w-[720px] ">
+          <p>LOADING::: {state.isLoading ? "TRUE" : "FALSE"}</p>
           <form
             action=""
             className="md:col-span-2  h-10 border-2 rounded-lg  grid grid-cols-12 ml-5"
@@ -132,25 +164,17 @@ function JobInfo() {
             <span className="col-span-11">
               <input
                 onChange={(e) => {
-                  setSearch(e.target.value);
+                  setState((prevState) => ({
+                    ...prevState,
+                    search: e.target.value,
+                  }));
                 }}
+                onKeyUp={() => myJobs()}
                 type="search"
                 placeholder="Search for vacancy"
                 className="h-9 w-full p-2 text-sm outline-none"
               />
-
-              {/* toggle for filter on mobile view */}
             </span>
-            {/* <span
-              onClick={handleDrop}
-              className="block md:hidden w-fit col-span-1 m-auto"
-            >
-              {!drop ? (
-                <AiOutlineClose size={19} />
-              ) : (
-                <BsFilterCircle size={19} />
-              )}
-            </span> */}
           </form>
         </div>
 
@@ -204,10 +228,9 @@ function JobInfo() {
       </div>
 
       {/* LIST FOR JOB VACANCY */}
-
       <div className="max-w-[1440px] mx-auto grid md:grid-cols-3 xl:grid-cols-3 mt-10">
         <div className="flex flex-col col-span-2 ml-10 md:w-3/4 xs:mx-5 md:ml-[80px]">
-          {jobVacancy.length === 0 ? (
+          {state.isLoading ? (
             <div className="h-screen w-auto text-gray-500 text-xl justify-center items-center text-center">
               <Lottie
                 loop
@@ -223,7 +246,7 @@ function JobInfo() {
           )}
 
           <ReactPaginate
-            pageCount={Math.ceil(filterJobs.length / jobsPerPage)}
+            pageCount={Math.ceil(state.filteredJobs.length / jobsPerPage)}
             pageRangeDisplayed={5}
             marginPagesDisplayed={2}
             onPageChange={handlePageClick}
@@ -242,7 +265,6 @@ function JobInfo() {
         </div>
 
         {/* SIDE LOTTIE */}
-
         <div className="flex flex-col col-span-1 xs:hidden md:block lg:w-3/4 mb-4">
           <div className="rounded-lg shadow-lg bg-white md:w-40 lg:w-50 lg:min-w-fit lg:mx-auto ml-5 border border-gray-300 mt-3 ">
             <Lottie

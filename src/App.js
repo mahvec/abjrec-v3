@@ -16,7 +16,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/job" element={<Job />} />
           <Route path="/success" element={<AppSuccess />} />
-          <Route path="/formpage/:title/:id" element={<FormPage />} />
+          <Route path="/formpage/:id" element={<FormPage />} />
         </Routes>
       </BrowserRouter>
     </>

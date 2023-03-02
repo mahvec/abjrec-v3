@@ -5,8 +5,8 @@ import heroPic from "../assets/images/hero1.png";
 
 function Hero() {
   return (
-    <div className=" grid md:grid-cols-3 max-w-[1440px] mx-auto bg-gradient-to-br from-white to-[#d4e7fe] xs:h-screen xs:pt-10 md:h-auto">
-      <div className=" mt-[-96px] w-full pt-10 md:h-auto mx-auto text-center flex flex-col justify-center md:col-span-2">
+    <div className=" grid md:grid-cols-3 max-w-[1440px] mx-auto bg-gradient-to-b from-white to-[#d4e7fe] xs:h-screen xs:pt-10 md:h-auto">
+      <div className=" mt-[-96px] w-full pt-10 pl-8 md:h-auto mx-auto text-center flex flex-col justify-center md:col-span-2 ">
         <p className="text-[#03256C] font-bold p-2 ">GET YOUR DREAM JOB</p>
         <h1 className="text-[#03256C] md:text-6xl sm:text-5xl text-3xl font-bold md:py-6 sm:py-6 xs:py-6 ">
           Explore all the most <span className="">exciting jobs roles</span>

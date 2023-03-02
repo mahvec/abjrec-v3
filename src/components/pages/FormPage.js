@@ -18,6 +18,10 @@ function FormPage() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const location = useLocation();
+  const job = location.state.job;
+  console.log(job);
+
   const {
     register,
     handleSubmit,
@@ -38,8 +42,8 @@ function FormPage() {
   console.log(errors);
 
   const { pathname } = useLocation();
-  const jobRole = pathname.split("/")[2].split("%20").join(" ");
-  const jobId = pathname.split("/")[3];
+  const jobId = pathname.split("/")[2];
+  console.log(jobId);
 
   function handleState(event) {
     setState(event.target.value);
@@ -166,6 +170,7 @@ function FormPage() {
                 <p className="text-red-600">{errors.phone?.message}</p>
               </div>
 
+              <p>{job.title}</p>
               {/* Role */}
               <div className="relative z-0 w-full mb-6 group">
                 <label
@@ -176,9 +181,8 @@ function FormPage() {
                 </label>
                 <input
                   type="text"
-                  value={jobRole}
+                  value={job.title}
                   {...register("cover_letter", { required: true })}
-                  placeholder=""
                   className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 />
                 <p className="text-red-600">{errors.cover_letter?.message}</p>
