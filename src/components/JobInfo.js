@@ -15,7 +15,7 @@ import AbujaIcon from "../assets/images/abujaicon.png";
 
 function JobInfo() {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState(null);
+  const [category] = useState(null);
   // const [drop, setDrop] = useState(true);
   // const handleDrop = () => setDrop(!drop);
   const [jobData, setJobData] = useState([]);
