@@ -170,7 +170,6 @@ function FormPage() {
                 <p className="text-red-600">{errors.phone?.message}</p>
               </div>
 
-              <p>{job.title}</p>
               {/* Role */}
               <div className="relative z-0 w-full mb-6 group">
                 <label
@@ -183,6 +182,7 @@ function FormPage() {
                   type="text"
                   value={job.title}
                   {...register("cover_letter", { required: true })}
+                  required
                   className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 />
                 <p className="text-red-600">{errors.cover_letter?.message}</p>
