@@ -9,11 +9,6 @@ const Info2 = () => {
             We recognize the talents, the strength of teamwork, and create
             opportunities for everyone to grow
           </p>
-          <p className="text-black font-medium text-sm md:text-lg h-fit w-auto py-5 px-3 md:mx-24">
-            An excellent workforce, great team working spirit and ability for
-            individual growth are what create our company’s HR-based competitive
-            advantage
-          </p>
         </div>
       </div>
     </div>

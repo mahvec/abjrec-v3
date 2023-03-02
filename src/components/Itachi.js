@@ -16,8 +16,10 @@ function Itachi() {
                 <Slide>WE ARE NOT YOUR TYPICAL JOB SITE</Slide>
               </h1>
               <p className="pt-5 text-black text-center xs:pr-10 align-center xs:text-sm font-medium md:text-md lg:text-lg mx-10 ">
-                Abuja Recruiter is makes it easier to find your next great
-                opportunity.
+                Abuja Recruiter makes it easier to find your next great
+                opportunity. <br></br>An excellent workforce, great team working
+                spirit and ability for individual growth are what create our
+                company’s HR-based competitive advantage
               </p>
             </div>
           </div>

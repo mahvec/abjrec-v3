@@ -29,7 +29,7 @@ function Navbar() {
             <img
               src={AbujaLogo}
               alt="Abuja Recruiter"
-              className="w-24 h-auto"
+              className="w-24 h-auto ml-3"
             />
           </Link>
         </h1>

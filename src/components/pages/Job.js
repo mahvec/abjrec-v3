@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import NewsLetter from "../NewsLetter";
+// import NewsLetter from "../NewsLetter";
 import JobInfo from "../JobInfo";
 
 function Job() {
@@ -9,7 +9,7 @@ function Job() {
     <>
       <Navbar />
       <JobInfo className="" />
-      <NewsLetter />
+      {/* <NewsLetter /> */}
       <Footer />
     </>
   );

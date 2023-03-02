@@ -6,7 +6,7 @@ import Info from "./components/Info";
 import Info2 from "./components/Info2";
 import Itachi from "./components/Itachi";
 import Navbar from "./components/Navbar";
-import NewsLetter from "./components/NewsLetter";
+// import NewsLetter from "./components/NewsLetter";
 import TeamVision from "./components/TeamVision";
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
       <Info2 />
       <Card />
       <TeamVision />
-      <NewsLetter />
+      {/* <NewsLetter /> */}
       <Footer />
     </div>
   );
