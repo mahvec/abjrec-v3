@@ -19,7 +19,7 @@ function JobInfo() {
   // const [drop, setDrop] = useState(true);
   // const handleDrop = () => setDrop(!drop);
   // const [jobData, setJobData] = useState([]);
-  // const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber] = useState(0);
   const jobsPerPage = 5;
 
   const [state, setState] = useState({
