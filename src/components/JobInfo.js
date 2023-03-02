@@ -1,11 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import { BsFilterCircle } from "react-icons/bs";
 // import { AiOutlineClose } from "react-icons/ai";
 import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
 // import { CATEGORY as CATEGORIES } from "./DropdownList";
-import { Slide } from "react-awesome-reveal";
+// import { Slide } from "react-awesome-reveal";
 import moment from "moment/moment";
 import NOresult from "../noresult.json";
 import { NavLink } from "react-router-dom";
@@ -15,11 +15,11 @@ import AbujaIcon from "../assets/images/abujaicon.png";
 
 function JobInfo() {
   // const [search, setSearch] = useState("");
-  const [category] = useState(null);
+  // const [category] = useState(null);
   // const [drop, setDrop] = useState(true);
   // const handleDrop = () => setDrop(!drop);
   // const [jobData, setJobData] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
+  // const [pageNumber, setPageNumber] = useState(0);
   const jobsPerPage = 5;
 
   const [state, setState] = useState({
