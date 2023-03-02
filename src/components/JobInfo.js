@@ -19,7 +19,7 @@ function JobInfo() {
   // const [drop, setDrop] = useState(true);
   // const handleDrop = () => setDrop(!drop);
   // const [jobData, setJobData] = useState([]);
-  const [pageNumber] = useState(0);
+  // const [pageNumber, setPageNumber] = useState(0);
   const jobsPerPage = 5;
 
   const [state, setState] = useState({
@@ -86,7 +86,7 @@ function JobInfo() {
         job.title.toLowerCase().includes(state.search.toLowerCase())
       );
 
-      const offset = pageNumber * jobsPerPage;
+      const offset = state.pageNumber * jobsPerPage;
       const currentJobs = jobs.slice(offset, offset + jobsPerPage);
 
       return setState((prevState) => ({
