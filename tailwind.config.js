@@ -11,8 +11,12 @@ module.exports = {
       xl: "1280px",
     },
     extend: {
+      scale: {
+        175: "1.75",
+        200: "2.00",
+      },
       fontFamily: {
-        'poppins': ['Poppins', 'sans-serif']
+        poppins: ["Poppins", "sans-serif"],
       },
       animation: {
         blob: "blob 7s infinite",

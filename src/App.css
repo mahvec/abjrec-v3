@@ -1,8 +1,84 @@
-*{
-    overflow-x: hidden;
+* {
+  overflow-x: hidden;
 }
-.card-css:hover{
-    background-color: #1D70A2;
-    color: beige;
+.card-css:hover {
+  transform: scale(1.19);
+}
 
+.design-icon,
+.facility-icon,
+.human-icon,
+.tech-icon,
+.finance-icon,
+.market-icon {
+  background-color: white;
+  position: relative;
+}
+
+.design-icon:hover::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\f5c3";
+  color: #d4e7feb8;
+  transform: scale(7);
+  left: 70px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* .fa-microchip {
+} */
+.market-icon:hover::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\e529";
+  color: #d4e7feb8;
+  transform: scale(7);
+  left: 70px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.tech-icon:hover::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\f2db";
+  color: #d4e7feb8;
+  transform: scale(7);
+  left: 70px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.finance-icon:hover::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\f51e";
+  color: #d4e7feb8;
+  transform: scale(7);
+  left: 70px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.human-icon:hover::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\f007";
+  color: #d4e7feb8;
+  transform: scale(7);
+  left: 70px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.facility-icon:hover::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\f1ad";
+  color: #d4e7feca;
+  transform: scale(7);
+  left: 70px;
+  z-index: -1;
+  opacity: 0.3;
 }

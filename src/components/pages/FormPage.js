@@ -302,9 +302,7 @@ function FormPage() {
                   submit
                 </button>
               </div>
-              {errorMessage && (
-                <div className="error-message">{errorMessage}</div>
-              )}
+              {errorMessage && window.alert(errorMessage)}
             </form>
           </div>
         </div>
