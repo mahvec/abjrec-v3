@@ -5,7 +5,7 @@ import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
 // import { CATEGORY as CATEGORIES } from "./DropdownList";
-// import { Slide } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 import moment from "moment/moment";
 import NOresult from "../noresult.json";
 import { NavLink } from "react-router-dom";
@@ -24,7 +24,7 @@ function JobInfo() {
 
   const [state, setState] = useState({
     search: "",
-    category: null,
+    // category: null,
     jobData: [],
     filteredJobs: [],
     pageNumber: 0,
@@ -34,7 +34,7 @@ function JobInfo() {
 
   useEffect(() => {
     jobList();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const jobList = async () => {
     setState((prevState) => ({
@@ -104,7 +104,7 @@ function JobInfo() {
   };
 
   const jobVacancy = state.filteredJobs.map((job) => (
-    <div key={job.id} delay={0.1}>
+    <div key={job.id}>
       <div className="block rounded-3xl  shadow-lg sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-200">
         <div className="grid grid-cols-5 gap-4 p-2">
           <div className=" p-1">
