@@ -103,52 +103,54 @@ function JobInfo() {
     }));
   };
 
-  const jobVacancy = state.filteredJobs.map((job) => (
-    <div key={job.id}>
-      <div className="block rounded-3xl  shadow-lg sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-200">
-        <div className="grid grid-cols-5 gap-4 p-2">
-          <div className=" p-1">
-            <div className=" rounded-xl h-full bg-gradient-to-r flex  font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
-              <div className="m-auto">
-                <img src={AbujaIcon} alt="" className="h-14 w-auto" />
+  const jobVacancy = state.filteredJobs
+    .sort((a, b) => b.id - a.id)
+    .map((job) => (
+      <div key={job.id}>
+        <div className="block rounded-3xl  shadow-lg sm:max-w-md md:max-w-md lg:max-w-xl  mb-10 border-2 border-gray-200">
+          <div className="grid grid-cols-5 gap-4 p-2">
+            <div className=" p-1">
+              <div className=" rounded-xl h-full bg-gradient-to-r flex  font-extrabold font-serif md:text-[20px] md:items-baseline lg:text-[20px] xl:text-[40px] text-[#023e8a]">
+                <div className="m-auto">
+                  <img src={AbujaIcon} alt="" className="h-14 w-auto" />
+                </div>
               </div>
             </div>
+            <div className="col-span-4 mb-1">
+              <p className="font-bold text-md md:text-lg lg:text-xl left uppercase text-black mr-1 ">
+                {job.title}
+              </p>
+              <p className="text-sm font-semibold pr-1 text-[#E40066]">
+                {job.role}
+              </p>
+              <p className="text-xs italic pr-3">Posted by: H.R</p>
+            </div>
           </div>
-          <div className="col-span-4 mb-1">
-            <p className="font-bold text-md md:text-lg lg:text-xl left uppercase text-black mr-1 ">
-              {job.title}
-            </p>
-            <p className="text-sm font-semibold pr-1 text-[#E40066]">
-              {job.role}
-            </p>
-            <p className="text-xs italic pr-3">Posted by: H.R</p>
+          <div className="border-t p-2 text-xs text-black ">
+            <p className="pl-2">{job.description}</p>
           </div>
-        </div>
-        <div className="border-t p-2 text-xs text-black ">
-          <p className="pl-2">{job.description}</p>
-        </div>
-        <div className="border-t h-fit my-2 pl-2">
-          <p className=" text-start text-xs px-2 text-black">
-            Published: {moment(job.publishedDate).format("DD/MM/YYYY")}
-          </p>
-          <p className=" text-start text-xs px-2 text-black">
-            Application end:&nbsp;
-            {moment(job.applicationEndDate).format("DD/MM/YYYY")}
-          </p>
-        </div>
-        <div className="border-t  font-semibold p-2 text-end px-4 pt-4 pb-2.5">
-          <NavLink
-            // to={"/formpage/" + job.title + "/" + job.id}
-            to={{ pathname: `/formpage/${job.id}` }}
-            state={{ job }}
-            className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
-          >
-            APPLY NOW
-          </NavLink>
+          <div className="border-t h-fit my-2 pl-2">
+            <p className=" text-start text-xs px-2 text-black">
+              Published: {moment(job.publishedDate).format("DD/MM/YYYY")}
+            </p>
+            <p className=" text-start text-xs px-2 text-black">
+              Application end:&nbsp;
+              {moment(job.applicationEndDate).format("DD/MM/YYYY")}
+            </p>
+          </div>
+          <div className="border-t  font-semibold p-2 text-end px-4 pt-4 pb-2.5">
+            <NavLink
+              // to={"/formpage/" + job.title + "/" + job.id}
+              to={{ pathname: `/formpage/${job.id}` }}
+              state={{ job }}
+              className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
+            >
+              APPLY NOW
+            </NavLink>
+          </div>
         </div>
       </div>
-    </div>
-  ));
+    ));
 
   return (
     <div>
