@@ -4,7 +4,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="max-w-[1440px] mx-auto px-2 min-h-[50px] bg-gradient-to-b xs:pb-4 md:pb-0 bg-slate-100 justify-center items-center">
+    <footer className="max-w-[1440px] mx-auto px-2 min-h-[50px]  xs:pb-4 md:pb-0 bg-gradient-to-r from-white via-slate-200 to-white justify-center items-center">
       {/* <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-0 sm:px-1 px-0 py-1 text-xs">
         <Item Links={COMPANY} title="COMPANY" />
         <Item Links={FEATURED} title="FEATURED" />
