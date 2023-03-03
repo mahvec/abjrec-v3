@@ -5,7 +5,7 @@ import Lottie from "react-lottie-player";
 import Writing from "../assets/writing.json";
 import Recruit from "../assets/recruiter.json";
 // import { CATEGORY as CATEGORIES } from "./DropdownList";
-import { Slide } from "react-awesome-reveal";
+// import { Slide } from "react-awesome-reveal";
 import moment from "moment/moment";
 import NOresult from "../noresult.json";
 import { NavLink } from "react-router-dom";
