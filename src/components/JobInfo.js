@@ -52,7 +52,7 @@ function JobInfo() {
         },
       });
 
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         const jobs = response.data.jobs;
         setState((prevState) => ({
           ...prevState,
@@ -230,18 +230,30 @@ function JobInfo() {
       <div className="max-w-[1440px] mx-auto grid md:grid-cols-3 xl:grid-cols-3 mt-10">
         <div className="flex flex-col col-span-2 ml-10 md:w-3/4 xs:mx-5 md:ml-[80px]">
           {state.isLoading ? (
-            <div className="h-screen w-auto text-gray-500 text-xl justify-center items-center text-center">
-              <Lottie
-                loop
-                animationData={NOresult}
-                play
-                className="mx-auto my-auto"
+            <div className="h-screen w-auto   justify-center items-center">
+              <img
+                src={AbujaIcon}
+                alt=""
+                className="h-52 w-auto opacity-50 mx-auto mt-32"
               />
-
-              <p>Sorry, no results found</p>
             </div>
           ) : (
-            jobVacancy
+            <div>
+              {state.filteredJobs.length > 0 ? (
+                jobVacancy
+              ) : (
+                <div className="h-screen w-auto text-gray-500 text-xl justify-center items-center text-center">
+                  <Lottie
+                    loop
+                    animationData={NOresult}
+                    play
+                    className="mx-auto my-auto"
+                  />
+
+                  <p>Sorry, no results found</p>
+                </div>
+              )}
+            </div>
           )}
 
           <ReactPaginate
