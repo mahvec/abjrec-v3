@@ -125,18 +125,18 @@ function JobInfo() {
           </div>
         </div>
         <div className="border-t p-2 text-xs text-black ">
-          <p>{job.description}</p>
+          <p className="pl-2">{job.description}</p>
         </div>
-        <div className="border-t h-fit my-2">
+        <div className="border-t h-fit my-2 pl-2">
           <p className=" text-start text-xs px-2 text-black">
             Published: {moment(job.publishedDate).format("DD/MM/YYYY")}
           </p>
           <p className=" text-start text-xs px-2 text-black">
-            Application end:
+            Application end:&nbsp;
             {moment(job.applicationEndDate).format("DD/MM/YYYY")}
           </p>
         </div>
-        <div className="border-t  font-semibold p-2 text-end px-4 py-2">
+        <div className="border-t  font-semibold p-2 text-end px-4 pt-4 pb-2.5">
           <NavLink
             // to={"/formpage/" + job.title + "/" + job.id}
             to={{ pathname: `/formpage/${job.id}` }}

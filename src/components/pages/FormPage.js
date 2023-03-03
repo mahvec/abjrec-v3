@@ -20,7 +20,7 @@ function FormPage() {
 
   const location = useLocation();
   const job = location.state.job;
-  console.log(job);
+  //   console.log(job);
 
   const {
     register,
@@ -32,7 +32,7 @@ function FormPage() {
       name: "",
       email: "",
       phone: "",
-      cover_letter: "",
+      cover_letter: `${job.title}`,
       state: "",
       local_government: "",
       linkedin_profile: "",
@@ -62,7 +62,7 @@ function FormPage() {
       reader.readAsDataURL(file);
       reader.onload = () => {
         var Base64 = reader.result;
-        console.log(Base64);
+        // console.log(Base64);
         setFileBase64String(Base64);
       };
       reader.onerror = (error) => {
@@ -185,7 +185,6 @@ function FormPage() {
                   required
                   className="block px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 />
-                <p className="text-red-600">{errors.cover_letter?.message}</p>
               </div>
 
               {/* state and local_government */}
