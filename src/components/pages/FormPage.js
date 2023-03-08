@@ -118,7 +118,7 @@ function FormPage() {
             Fill In Your Details
           </p>
           <div className="w-full p-4">
-            <form onSubmit={handleSubmit(submitForm)}>
+            <form onSubmit={handleSubmit(submitForm)} autoComplete="off">
               {/* full name */}
               <div className="relative z-0 w-full mb-6 group">
                 <label
