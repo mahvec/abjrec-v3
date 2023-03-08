@@ -118,7 +118,7 @@ function FormPage() {
             Fill In Your Details
           </p>
           <div className="w-full p-4">
-            <form onSubmit={handleSubmit(submitForm)} autoComplete="on">
+            <form onSubmit={handleSubmit(submitForm)} autoComplete="off">
               {/* full name */}
               <div className="relative z-0 w-full mb-6 group">
                 <label
@@ -198,6 +198,7 @@ function FormPage() {
                   </label>
                   <select
                     {...register("state", { required: true })}
+                    autoComplete="off"
                     onChange={handleState}
                     className="w-full text-sm border-0 border-b-2 capitalize border-gray-300 focus:ring-0 focus:border-blue-600 focus:outline-none bg-transparent"
                   >
@@ -220,6 +221,7 @@ function FormPage() {
                   </label>
                   <select
                     {...register("local_government", { required: true })}
+                    autoComplete="off"
                     id="local_government"
                     className="w-full text-sm border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-blue-600 focus:outline-none bg-transparent"
                   >
