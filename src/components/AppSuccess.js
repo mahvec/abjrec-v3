@@ -11,7 +11,7 @@ const AppSuccess = () => {
       setCount((currentCount) => currentCount - 1);
     }, 3000);
     // when count is 0, navigate
-    count === 0 && navigate("/jobs");
+    count === 0 && navigate("/job");
     // clean up the interval
     return () => clearInterval(interval);
   }, [count, navigate]);
