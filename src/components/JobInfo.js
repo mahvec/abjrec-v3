@@ -120,9 +120,20 @@ function JobInfo() {
               <p className="font-bold text-md md:text-lg lg:text-xl left uppercase text-black mr-1 ">
                 {job.title}
               </p>
-              <p className="text-sm font-semibold pr-1 text-[#E40066]">
+              <p
+                className={`text-sm font-semibold pr-1 ${
+                  moment(job.applicationEndDate).isBefore(moment())
+                    ? "text-gray-400"
+                    : "text-[#E40066]"
+                }`}
+              >
                 {job.role}
               </p>
+              {moment(job.applicationEndDate).isBefore(moment()) && (
+                <p className="text-xs italic pr-3 text-black">
+                  This vacancy has expired
+                </p>
+              )}
               <p className="text-xs italic pr-3">Posted by: H.R</p>
             </div>
           </div>
@@ -140,10 +151,13 @@ function JobInfo() {
           </div>
           <div className="border-t  font-semibold p-2 text-end px-4 pt-4 pb-2.5">
             <NavLink
-              // to={"/formpage/" + job.title + "/" + job.id}
               to={{ pathname: `/formpage/${job.id}` }}
               state={{ job }}
-              className="bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer"
+              className={`bg-[#023e8a] px-3 py-1 rounded-xl text-white text-sm font-poppins cursor-pointer ${
+                moment(job.applicationEndDate).isBefore(moment())
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : ""
+              }`}
             >
               APPLY NOW
             </NavLink>
