@@ -25,7 +25,7 @@ function Navbar() {
       <div className="flex justify-between items-center h-16 max-w-[1440px] mx-auto px-4 text-[#03256C]">
         {/* MAIN NAV BAR */}
         <h1 className="md:text-2xl xs:sm:md:text-2xl text-xl w-full text-[#03256C]  font-bold">
-          <Link to="/">
+          <Link to="/" className="w-24">
             <img
               src={AbujaLogo}
               alt="Abuja Recruiter"
